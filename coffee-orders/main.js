@@ -6,7 +6,7 @@ $(function(){
 
     $.ajax({
         type: 'GET',
-        url: 'orders',
+        url: 'orders.json',
         success: function(data){
             console.log('success', data);
         }
