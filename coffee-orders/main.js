@@ -1,5 +1,7 @@
 // https://jessypeck.github.io/coffee-orders/orders.json
 
+console.log('Javascript is working!');
+
 $(function(){
 
     $.ajax({
