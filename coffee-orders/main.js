@@ -1,15 +1,24 @@
 // https://jessypeck.github.io/coffee-orders/orders.json
 
-console.log('Javascript is working!');
+var $orderList = $('#orderList'); // id of target ul in html
 
 $(function(){
 
+// Get Orders
     $.ajax({
         type: 'GET',
-        url: 'orders.json',
-        success: function(data){
-            console.log('success', data);
+        url: 'https://jessypeck.github.io/coffee-orders/orders.json',
+        success: function(orders){
+            $.each(orders, function(i, order){
+                addOrderToList(order);    
+            });
+
         }
     })
 })
+
+function addOrderToList(order){
+    var newListEntry = "<li>Name: " + order.name + " , Order: " + order.drink + "</li>";
+    $orderList.append(newListEntry);
+}
 

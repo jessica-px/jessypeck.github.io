@@ -1,10 +1,10 @@
 [
     {
         "name" : "Jane",
-        "order" : "mocha"
+        "drink" : "mocha"
     },
     {
         "name" : "April",
-        "order" : "tea"
+        "drink" : "tea"
     }
 ]
