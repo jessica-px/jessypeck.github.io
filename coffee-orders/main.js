@@ -17,7 +17,7 @@ $(function(){
 // Get Orders
     $.ajax({
         type: 'GET',
-        url: 'https://jessypeck.github.io/coffee-orders/orders.json',
+        url: 'orders.json',
         success: function(orders){
             $.each(orders, function(i, order){
                 addOrderToList(order.name, order.drink);    

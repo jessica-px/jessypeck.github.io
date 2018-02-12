@@ -1,0 +1,17 @@
+[
+    {
+        "path" : "/imgs/up-center/bg1.png",
+        "align" : "up-center",
+        "text-color" : "dark"
+    },
+    {
+        "path" : "/imgs/up-left/bg1.png",
+        "align" : "up-left",
+        "text-color" : "light"
+    },
+    {
+        "path" : "/imgs/up-right/bg1.png",
+        "align" : "up-right",
+        "text-color" : "light"
+    }
+]
