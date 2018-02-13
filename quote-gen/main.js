@@ -50,32 +50,22 @@ function filterQuoteLength(data){
 
 function catifyQuote(data){
     var quoteText = data.quoteText;
-    var quoteAuthor = data.quoteAuthor + " (?)";
+    var quoteAuthor = stylizeAuthorName(data);
 
     var catQuote = quoteText.replace( 
-        (/\bperson\b|\bman\b|\bwoman\b|\bhuman\b/gi), "cat");
-    catQuote = catQuote.replace(
-        (/\bpeople\b|\bmen\b|\bwomen\b|\bhumans\b|\bwe\b/gi), "cats");
-    catQuote = catQuote.replace(
-        (/\byour\b/gi), "your cats");
-    catQuote = catQuote.replace(
-        (/\byou\b/gi), "your cats");
-    catQuote = catQuote.replace(
-        (/\byourself\b/gi), "themselves");
-    catQuote = catQuote.replace(
-        (/\ourselves\b/gi), "themselves");
-    catQuote = catQuote.replace(
-        (/\bchild\b/gi), "kitten");
-    catQuote = catQuote.replace(
-        (/\bchildren\b/gi), "kittens");
-    catQuote = catQuote.replace(
-        (/\bothers\b/gi), "other cats");
-    catQuote = catQuote.replace(
-        (/\bour\b/gi), "our cats");
-    catQuote = catQuote.replace(
-        (/\banyone\b/gi), "any cat");
-    catQuote = catQuote.replace(
-        (/\beveryone\b/gi), "every cat");
+        (/\bperson\b|\bman\b|\bwoman\b|\bhuman\b/gi), "cat").replace(
+        (/\bpeople\b|\bmen\b|\bwomen\b|\bhumans\b|\bwe\b/gi), "cats").replace(
+        (/\byourself\b/gi), "themselves").replace(
+        (/\byour\b/gi), "your cats").replace(
+        (/\byou\b/gi), "your cats").replace(
+        (/\bourselves\b/gi), "themselves").replace(
+        (/\bchild\b/gi), "kitten").replace(
+        (/\bchildren\b/gi), "kittens").replace(
+        (/\bothers\b/gi), "other cats").replace(
+        (/\bour\b/gi), "our cats").replace(
+        (/\banyone\b/gi), "any cat").replace(
+        (/\beveryone\b/gi), "every cat").replace(
+        (/\bno\sone\b/gi), "no cat");
 
     if (catQuote.indexOf("cat") == -1){
         rejectQuote();
@@ -83,6 +73,16 @@ function catifyQuote(data){
     }
 
     showQuote(catQuote, quoteAuthor);
+}
+
+
+function stylizeAuthorName(data){
+    var quoteAuthor = data.quoteAuthor
+    quoteAuthor += " (?)";
+    if (quoteAuthor == ""){
+        quoteAuthor = "Unknown"
+    }
+    return quoteAuthor;
 }
 
 function rejectQuote(){
