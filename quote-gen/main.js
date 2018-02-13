@@ -1,17 +1,29 @@
 
-var forismaticAPI = "https://api.forismatic.com/api/1.0/?method=getQuote&format=json&lang=en";
+var forismaticAPI = "http://api.forismatic.com/api/1.0/?method=getQuote&format=jsonp&lang=en&jsonp=?";
+var forismaticAPI2 = "http://api.forismatic.com/api/1.0/";
+var outputText = document.getElementById("output");
 
 //
 function getQuoteFromAPI(){
     $.ajax({
-        type: 'GET',
-        url: forismaticAPI,
-        success: function(quoteJson){
-            return quoteJson;
-    
+        jsonp: "jsonp",
+        url: forismaticAPI2,
+        contentType: "application/jsonp",
+        format:"jsonp",
+        dataType: "jsonp",
+        cache: false,
+        data: {
+            method: "getQuote",
+            lang: "en",
+            format: "jsonp"
+          },
+        success: function(data){
+            console.log(data);
+            showQuote(data);   
         },
         error: function(){
             altert("Error, problem finding quote.");
+            return "";
         }
     })
 }
@@ -20,12 +32,13 @@ function getQuoteFromAPI(){
 // On Click "New Quote" Button
 $('.newBtn').on('click', function(){
     console.log("Click!");
-    var newQuote = getQuoteFromAPI();
-    showQuote(newQuote);   
+    getQuoteFromAPI();
+    
 });
 
-function showQuote(quoteJson){
-    var quoteText = quoteJson.quoteText;
-    var quoteAuthor = quoteJson.quoteAuthor;
+function showQuote(data){
+    var quoteText = data.quoteText;
+    var quoteAuthor = data.quoteAuthor;
     console.log(quoteText + "..." + quoteAuthor);
+    outputText.innerHTML = quoteText + " - " + quoteAuthor;
 }
