@@ -6,6 +6,40 @@ var canvasContext = document.getElementById("canvas").getContext("2d");
 var currentImgData;
 var currentQuote;
 
+
+
+function toggleLoader(){
+    if (waitingOnQuote){
+        document.getElementById("loader").style.display = "block";
+        return;
+    }
+    document.getElementById("loader").style.display = "none";
+}
+
+
+$('.newBtn').on('click', function(){ // On Click "New Quote" Button
+    if (!waitingOnQuote){
+        waitingOnQuote = true;
+        toggleLoader();
+        console.log("Click!");
+        getQuoteFromAPI();
+        getImageFromJSON();
+    }
+});
+
+function showErrorImage(){
+    waitingOnQuote = false;
+    toggleLoader();
+    img = new Image();
+    img.src = "imgs/error.png";
+    img.onload = function(){
+        canvasContext.drawImage(img, canvas.width / 2 - img.width / 2, 
+            canvas.height / 2 - img.height / 2, img.width, img.height);
+    }
+}
+
+
+
 // QUOTE GETTING --------------------------------------------
 function getQuoteFromAPI(){
     $.ajax({
@@ -24,25 +58,14 @@ function getQuoteFromAPI(){
             filterQuotes(data);   
         },
         error: function(){
-            alert("Error, problem finding quote.");
+            showErrorImage();
         }
     })
 }
 
 
-$('.newBtn').on('click', function(){ // On Click "New Quote" Button
-    if (!waitingOnQuote){
-        waitingOnQuote = true;
-        toggleLoader();
-        console.log("Click!");
-        getQuoteFromAPI();
-        getImageFromJSON();
-    }
-});
-
-
 function filterQuotes(data){
-    if (filterQuoteLength(data) || filterMoodRuiningQuotes(data)){
+    if (filterQuoteLength(data) || filterMoodRuiningQuotes(data) || filterWierdSymbols(data)){
         rejectQuote();
     }
     else{
@@ -60,6 +83,13 @@ function filterQuoteLength(data){
 
 function filterMoodRuiningQuotes(data){
     if (data.quoteAuthor == "Donald Trump"){
+        return true;
+    }
+    return false;
+}
+
+function filterWierdSymbols(data){
+    if (data.quoteText.indexOf("€") != -1){
         return true;
     }
     return false;
@@ -115,7 +145,7 @@ function catifyQuote(data){
 function stylizeAuthorName(data){
     var quoteAuthor = data.quoteAuthor
     if (quoteAuthor == ""){
-        quoteAuthor = "Unknown"
+        quoteAuthor = "- Unknown"
         return quoteAuthor;
     }
     quoteAuthor = "- " + quoteAuthor + " (?)";
@@ -135,13 +165,6 @@ function showQuote(quoteText, quoteAuthor){
     showImage(currentImgData, quoteText, quoteAuthor);
 }
 
-function toggleLoader(){
-    if (waitingOnQuote){
-        document.getElementById("loader").style.display = "block";
-        return;
-    }
-    document.getElementById("loader").style.display = "none";
-}
 
 // IMAGE ---------------------------------------------------
 
@@ -159,7 +182,7 @@ function getImageFromJSON(){
             currentImgData = data[Math.floor(Math.random() * data.length)];
         },
         error: function(){
-            alert("Error, problem finding image.");
+            showErrorImage();
         }
     })
 }
@@ -169,8 +192,9 @@ function showImage(imgData, quoteText, quoteAuthor){
     img = new Image();
     img.src = imgData.path;
     img.onload = function(){
-        canvasContext.drawImage(img, 0, 0, img.width, img.height);
-        drawQuoteOnImage(imgData, quoteText, quoteAuthor);
+        canvasContext.drawImage(img, canvas.width / 2 - img.width / 2, 
+            canvas.height / 2 - img.height / 2, img.width, img.height);
+        drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
     }
 }
 
