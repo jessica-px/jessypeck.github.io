@@ -4,6 +4,7 @@
     <title>Cat Quotes</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 </head>
 
 <body>
@@ -22,18 +23,18 @@
     <div class = "container">
         <div class = "quoteLocation">
             <canvas id = "canvas" width = 600px height = 600px></canvas>
-
-
-            <!-- 
-            <img id = "catImg" src = "imgs/up-center/bg1.png">
-            -->
-            <!--
-            <p id = "output" style="color: grey">Temporary Quote Output</p>
-            -->
         </div>
         <div class = "buttonRow">
             <button class = "newBtn">New Quote</button>
             <div class="loader" id="loader"></div>
+        </div>
+        <div class = "mediaRow">
+            <button id = "facebookBtn"><i class="fab fa-facebook-f"></i> Share</button>
+            <button id = "twitterBtn"><i class="fab fa-twitter"></i> Tweet</button>
+            <button id = "pinterestBtn"><i class="fab fa-pinterest"></i> Pin</button>
+            <a href="#" onclick="downloadImage(this)" download="cat_quote.png">
+                <button id = "saveBtn"><i class="fas fa-save"></i> Save</button>
+            </a>
         </div>
 
 

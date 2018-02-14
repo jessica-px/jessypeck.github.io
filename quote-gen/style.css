@@ -8,7 +8,7 @@ html, body{
 .container {
     display: grid;
     grid-template-columns: 0px 1fr 0px;
-    grid-template-rows: auto auto 30px 20px;
+    grid-template-rows: auto auto auto 20px;
     grid-row-gap: 0px;
 }
 
@@ -67,18 +67,6 @@ nav a:hover{
     text-align: center;
 }
 
-/*
-.quoteLocation img{
-    display: block;
-    height: auto;
-    width: 100%;
-    max-width: 600px;
-    margin: auto;
-    box-shadow: 5px 5px 20px black, -5px -5px 20px black;
-    margin-bottom: 20px;
-}
-*/
-
 #canvas {
     display: block;
     height: auto;
@@ -96,6 +84,7 @@ nav a:hover{
 }
 
 .newBtn {
+    width: auto;
     display: inline-block;
     padding: 14px;
     font-size: 16px;
@@ -106,6 +95,12 @@ nav a:hover{
     border-radius: 10px;
     box-shadow: 0px 5px 0px 0px darkgreen;
     outline: none;
+}
+
+.newBtn:hover{
+    background: rgb(11, 126, 11);
+    box-shadow: 0px 4px 0px 0px darkgreen;
+    transform: translateY(1px);
 }
 
 .newBtn:active{
@@ -128,6 +123,58 @@ nav a:hover{
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.mediaRow{
+    margin-top: 20px;
+    grid-column: 2;
+    grid-row: 4;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-auto-flow: row;
+    text-align: center;
+}
+
+.mediaRow button{
+    justify-self: center;
+    display: inline-block;
+    padding: 5px;
+    width: 70px;
+    font-size: 12px;
+    letter-spacing: 1.2px;
+    color: #444;
+    background: none;
+    border: 1px solid #444;
+    border-radius: 15px;
+    outline: none;
+    transition: .2s;
+}
+.mediaRow button:hover{
+    color:white;
+    cursor: pointer;
+}
+
+#facebookBtn:hover{
+    background: #4060A5;
+    border: 1px solid #4060A5;
+}
+
+#twitterBtn:hover{
+    background: #00ABE3;
+    border: 1px solid #00ABE3;
+}
+
+#pinterestBtn:hover{
+    background: #cb2027;
+    border: 1px solid #cb2027;
+}
+
+#saveBtn:hover{
+    background: #000;
+    border: 1px solid #000;
+}
+
+
 
 
 /* -------    MEDIA   QUERIES      -------*/

@@ -6,7 +6,28 @@ var canvasContext = document.getElementById("canvas").getContext("2d");
 var currentImgData;
 var currentQuote;
 
+/// Buttons
 
+// "New Quote"
+$('.newBtn').on('click', function(){
+    if (!waitingOnQuote){
+        waitingOnQuote = true;
+        toggleLoader();
+        console.log("Click!");
+        getQuoteFromAPI();
+        getImageFromJSON();
+    }
+});
+
+// "Save"
+function downloadImage(linkElement){
+    console.log("Trying to download image!");
+    var newImagePath = document.getElementById("canvas").toDataURL();
+    linkElement.href = newImagePath;
+};
+
+
+///////////////////////////////////////////////////////////////////
 
 function toggleLoader(){
     if (waitingOnQuote){
@@ -17,15 +38,7 @@ function toggleLoader(){
 }
 
 
-$('.newBtn').on('click', function(){ // On Click "New Quote" Button
-    if (!waitingOnQuote){
-        waitingOnQuote = true;
-        toggleLoader();
-        console.log("Click!");
-        getQuoteFromAPI();
-        getImageFromJSON();
-    }
-});
+
 
 function showErrorImage(){
     waitingOnQuote = false;
@@ -40,7 +53,7 @@ function showErrorImage(){
 
 
 
-// QUOTE GETTING --------------------------------------------
+// QUOTE GETTING & FORMATTING    --------------------------------------------
 function getQuoteFromAPI(){
     $.ajax({
         jsonp: "jsonp",
