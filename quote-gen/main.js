@@ -21,7 +21,7 @@ function getQuoteFromAPI(){
             format: "jsonp"
           },
         success: function(data){
-            filterQuoteLength(data);   
+            filterQuotes(data);   
         },
         error: function(){
             alert("Error, problem finding quote.");
@@ -41,15 +41,28 @@ $('.newBtn').on('click', function(){ // On Click "New Quote" Button
 });
 
 
+function filterQuotes(data){
+    if (filterQuoteLength(data) || filterMoodRuiningQuotes(data)){
+        rejectQuote();
+    }
+    else{
+        catifyQuote(data);
+    }
+}
+
 function filterQuoteLength(data){
     var quoteText = data.quoteText;
      if(quoteText.length > 100){
-        rejectQuote();
-        return;
+        return true;
      }
-     else{
-        catifyQuote(data)
-     }
+     return false;
+}
+
+function filterMoodRuiningQuotes(data){
+    if (data.quoteAuthor == "Donald Trump"){
+        return true;
+    }
+    return false;
 }
 
 function catifyQuote(data){
@@ -101,10 +114,11 @@ function catifyQuote(data){
 
 function stylizeAuthorName(data){
     var quoteAuthor = data.quoteAuthor
-    quoteAuthor += " (?)";
     if (quoteAuthor == ""){
         quoteAuthor = "Unknown"
+        return quoteAuthor;
     }
+    quoteAuthor = "- " + quoteAuthor + " (?)";
     return quoteAuthor;
 }
 
@@ -118,8 +132,7 @@ function rejectQuote(){
 function showQuote(quoteText, quoteAuthor){
     waitingOnQuote = false;
     toggleLoader();
-    //outputText.innerHTML = quoteText + " - " + quoteAuthor;
-    showImage(currentImgData, quoteText);
+    showImage(currentImgData, quoteText, quoteAuthor);
 }
 
 function toggleLoader(){
@@ -144,7 +157,6 @@ function getImageFromJSON(){
           },
         success: function(data){
             currentImgData = data[Math.floor(Math.random() * data.length)];
-            //showImage(randomImgData);   
         },
         error: function(){
             alert("Error, problem finding image.");
@@ -153,16 +165,16 @@ function getImageFromJSON(){
 }
 
 
-function showImage(imgData){
+function showImage(imgData, quoteText, quoteAuthor){
     img = new Image();
     img.src = imgData.path;
     img.onload = function(){
         canvasContext.drawImage(img, 0, 0, img.width, img.height);
-        drawQuoteOnImage(imgData, "HELLO");
+        drawQuoteOnImage(imgData, quoteText, quoteAuthor);
     }
 }
 
-function drawQuoteOnImage(imgData){
+function drawQuoteOnImage(imgData, quoteText, quoteAuthor){
     if (imgData.textColor == "light"){
         canvasContext.fillStyle = "white";
     }
@@ -172,7 +184,7 @@ function drawQuoteOnImage(imgData){
     canvasContext.textAlign = "center";
     canvasContext.textBaseline = "top";
     canvasContext.font = "20px Arial";
-    drawTextByLines(currentQuote, 300, 80, 20, 250);
+    drawTextByLines(quoteText, quoteAuthor, 300, 80, 20, 250);
 
     if (imgData.align == "up-center"){
 
@@ -184,16 +196,26 @@ function drawQuoteOnImage(imgData){
 ///   Based on code from "Ash Blue" @ https://codepen.io/ashblue/pen/fGkma?editors=0010
 
 
-function drawTextByLines(text, xPos, yPos, fontSize, maxWidth){
-    lines = getTextLines(text, fontSize, maxWidth);
+function drawTextByLines(text, quoteAuthor, xPos, yPos, fontSize, maxWidth){
+    lines = getTextLines(text, quoteAuthor, fontSize, maxWidth);
     for (var x = 0; x < lines.length; x++){
         var currentLine = lines[x];
-        console.log("Writing line: " + currentLine.text);
+        //On final line, print author name in slightly smaller font
+        if (x == lines.length -1){
+            var authorFontSize = fontSize - 4 + "px";
+            canvasContext.fillStyle = "grey";
+            canvasContext.font = authorFontSize + " Arial";
+            canvasContext.fillText(currentLine.text, xPos, yPos + currentLine.lineY +10);
+            break;
+        }
+        // Otherwise print like normal
         canvasContext.fillText(currentLine.text, xPos, yPos + currentLine.lineY);
+
     }
+
 }
 
-function getTextLines(text, fontSize, maxWidth){
+function getTextLines(text, quoteAuthor, fontSize, maxWidth){
     var words = text.split(" "),
         lines = [], // 2D array. [0] = text, [1] = lineY
         line = "",
@@ -223,7 +245,7 @@ function getTextLines(text, fontSize, maxWidth){
         }
     }
 
-    // Anything left over is added to final line
+    // Anything left over is added to a final line
     if (line.length > 0 && line[0] != " "){
         currentLineY = lines.length * fontSize + fontSize;
         lines.push({ 
@@ -231,6 +253,14 @@ function getTextLines(text, fontSize, maxWidth){
             lineY: currentLineY 
         });
     }
+
+    // The very last line is for the quote author
+    currentLineY = lines.length * fontSize + fontSize;
+    lines.push({ 
+        text: quoteAuthor, 
+        lineY: currentLineY 
+    });
+
 
     return lines;
 }
