@@ -67,14 +67,32 @@ nav a:hover{
     text-align: center;
 }
 
+/*
 .quoteLocation img{
     display: block;
     height: auto;
     width: 100%;
-    margin: auto;
     max-width: 600px;
+    margin: auto;
     box-shadow: 5px 5px 20px black, -5px -5px 20px black;
     margin-bottom: 20px;
+}
+*/
+
+#canvas {
+    display: block;
+    height: auto;
+    width: 100%;
+    max-width: 600px;
+    margin: auto;
+    box-shadow: 5px 5px 20px black, -5px -5px 20px black;
+    margin-bottom: 20px;
+}
+
+.buttonRow{
+    grid-column: 2;
+    grid-row: 3;
+    text-align: center;
 }
 
 .newBtn {
@@ -93,6 +111,22 @@ nav a:hover{
 .newBtn:active{
     box-shadow: 0px 2px 0px 0px darkgreen;
     transform: translateY(3px);
+}
+
+.loader {
+    display: none;
+    border: 5px solid #444;
+    border-top: 5px solid rgb(95, 168, 95);
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    margin: 15px auto 0px auto;
+    animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 

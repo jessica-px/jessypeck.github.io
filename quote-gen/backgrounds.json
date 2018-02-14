@@ -1,17 +1,17 @@
 [
     {
-        "path" : "/imgs/up-center/bg1.png",
+        "path" : "imgs/up-center/bg1.png",
         "align" : "up-center",
-        "text-color" : "dark"
+        "textColor" : "dark"
     },
     {
-        "path" : "/imgs/up-left/bg1.png",
+        "path" : "imgs/up-left/bg1.png",
         "align" : "up-left",
-        "text-color" : "light"
+        "textColor" : "light"
     },
     {
-        "path" : "/imgs/up-right/bg1.png",
+        "path" : "imgs/up-right/bg1.png",
         "align" : "up-right",
-        "text-color" : "light"
+        "textColor" : "light"
     }
 ]

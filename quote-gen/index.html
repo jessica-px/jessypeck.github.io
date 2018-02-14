@@ -21,10 +21,21 @@
 
     <div class = "container">
         <div class = "quoteLocation">
-            <img src = "imgs/up-center/bg1.png">
-            <button class = "newBtn">New Quote</button>
+            <canvas id = "canvas" width = 600px height = 600px></canvas>
+
+
+            <!-- 
+            <img id = "catImg" src = "imgs/up-center/bg1.png">
+            -->
+            <!--
             <p id = "output" style="color: grey">Temporary Quote Output</p>
+            -->
         </div>
+        <div class = "buttonRow">
+            <button class = "newBtn">New Quote</button>
+            <div class="loader" id="loader"></div>
+        </div>
+
 
     </div>
 
