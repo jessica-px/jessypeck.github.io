@@ -6,7 +6,7 @@ var canvasContext = document.getElementById("canvas").getContext("2d");
 var currentImgData;
 var currentQuote;
 
-// QUOTE GETTING ---------------------------------------
+// QUOTE GETTING --------------------------------------------
 function getQuoteFromAPI(){
     $.ajax({
         jsonp: "jsonp",
@@ -30,8 +30,7 @@ function getQuoteFromAPI(){
 }
 
 
-// On Click "New Quote" Button
-$('.newBtn').on('click', function(){
+$('.newBtn').on('click', function(){ // On Click "New Quote" Button
     if (!waitingOnQuote){
         waitingOnQuote = true;
         toggleLoader();
@@ -57,23 +56,41 @@ function catifyQuote(data){
     var quoteText = data.quoteText;
     var quoteAuthor = stylizeAuthorName(data);
 
+    // lowercase
     var catQuote = quoteText.replace( 
-        (/\bperson\b|\bman\b|\bwoman\b|\bhuman\b/gi), "cat").replace(
-        (/\bpeople\b|\bmen\b|\bwomen\b|\bhumans\b|\bwe\b/gi), "cats").replace(
-        (/\byourself\b/gi), "themselves").replace(
-        (/\byour\b/gi), "your cats").replace(
-        (/\byou\b/gi), "your cats").replace(
-        (/\bus\b/gi), "them").replace(
-        (/\bourselves\b/gi), "themselves").replace(
-        (/\bchild\b/gi), "kitten").replace(
-        (/\bchildren\b/gi), "kittens").replace(
-        (/\bothers\b/gi), "other cats").replace(
-        (/\bour\b/gi), "our cats").replace(
-        (/\banyone\b/gi), "any cat").replace(
-        (/\beveryone\b/gi), "every cat").replace(
-        (/\bno\sone\b/gi), "no cat");
+        (/\bperson\b|\bman\b|\bwoman\b|\bhuman\b/g), "cat").replace(
+        (/\bpeople\b|\bmen\b|\bwomen\b|\bhumans\b|\bwe\b/g), "cats").replace(
+        (/\byourself\b/g), "themselves").replace(
+        (/\byour\b/g), "your cats").replace(
+        (/\byou\b/g), "your cats").replace(
+        (/\bus\b/g), "them").replace(
+        (/\bourselves\b/g), "themselves").replace(
+        (/\bchild\b/g), "kitten").replace(
+        (/\bchildren\b/g), "kittens").replace(
+        (/\bothers\b/g), "other cats").replace(
+        (/\bour\b/g), "our cats").replace(
+        (/\banyone\b/g), "any cat").replace(
+        (/\beveryone\b/g), "every cat").replace(
+        (/\bno\sone\b/g), "no cat");
+    // uppercase
+    var catQuote = catQuote.replace( 
+        (/\bPerson\b|\bMan\b|\bWoman\b|\bHuman\b/g), "Cat").replace(
+        (/\bPeople\b|\bMen\b|\bWomen\b|\bHumans\b|\bWe\b/g), "Cats").replace(
+        (/\bYourself\b/g), "Themselves").replace(
+        (/\bYour\b/g), "Your cats").replace(
+        (/\bYou\b/g), "Your cats").replace(
+        (/\bUs\b/g), "Them").replace(
+        (/\bOurselves\b/g), "Themselves").replace(
+        (/\bChild\b/g), "Kitten").replace(
+        (/\bChildren\b/g), "Kittens").replace(
+        (/\bOthers\b/g), "Other cats").replace(
+        (/\bOur\b/g), "Our cats").replace(
+        (/\bAnyone\b/g), "Any cat").replace(
+        (/\bEveryone\b/g), "Every cat").replace(
+        (/\bNo\sone\b/g), "No cat");
 
-    if (catQuote.indexOf("cat") == -1){
+    if (catQuote.indexOf("cat") == -1 && catQuote.indexOf("kitten") == -1
+        && catQuote.indexOf("Cat") == -1 && catQuote.indexOf("Kitten") == -1){
         rejectQuote();
         return;
     }
@@ -113,7 +130,7 @@ function toggleLoader(){
     document.getElementById("loader").style.display = "none";
 }
 
-// IMAGE GETTING ---------------------------------------
+// IMAGE ---------------------------------------------------
 
 function getImageFromJSON(){
     $.ajax({
