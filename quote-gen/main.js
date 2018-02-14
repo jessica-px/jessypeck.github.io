@@ -4,11 +4,12 @@ var outputText = document.getElementById("output");
 var waitingOnQuote = false;
 var canvasContext = document.getElementById("canvas").getContext("2d");
 var currentImgData;
+var currentImgPath;
 var currentQuote;
 
 /// Buttons
 
-// "New Quote"
+// "New Quote" Button
 $('.newBtn').on('click', function(){
     if (!waitingOnQuote){
         waitingOnQuote = true;
@@ -19,11 +20,10 @@ $('.newBtn').on('click', function(){
     }
 });
 
-// "Save"
+// "Save" Button
 function downloadImage(linkElement){
-    console.log("Trying to download image!");
-    var newImagePath = document.getElementById("canvas").toDataURL();
-    linkElement.href = newImagePath;
+    console.log("Downloading image...");
+    linkElement.href = currentImgPath;
 };
 
 
@@ -208,6 +208,8 @@ function showImage(imgData, quoteText, quoteAuthor){
         canvasContext.drawImage(img, canvas.width / 2 - img.width / 2, 
             canvas.height / 2 - img.height / 2, img.width, img.height);
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
+        currentImgPath = document.getElementById("canvas").toDataURL();
+        document.getElementById("quoteImg").src = currentImgPath;
     }
 }
 
