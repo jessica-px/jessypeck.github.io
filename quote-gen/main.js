@@ -10,14 +10,15 @@ var currentQuote;
 
 // Facebook //////////////////////////////
 
-function shareOverrideOGMeta(overrideImage)
+function shareOverrideOGMeta(overrideImage, quoteText, quoteAuthor)
 {
 	FB.ui({
 		method: 'share_open_graph',
 		action_type: 'og.shares',
 		action_properties: JSON.stringify({
 			object: {
-				'og:image': currentImgPath
+                'og:image': currentImgPath,
+                'og:description': quoteText + " " + quoteAuthor
 			}
 		})
 	},
@@ -231,7 +232,7 @@ function makeImage(imgData, quoteText, quoteAuthor){
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
         currentImgPath = document.getElementById("canvas").toDataURL();
         document.getElementById("quoteImg").src = currentImgPath;
-        shareOverrideOGMeta(currentImgPath);
+        shareOverrideOGMeta(currentImgPath, quoteText, quoteAuthor);
     }
 }
 
