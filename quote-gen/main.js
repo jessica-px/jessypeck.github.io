@@ -8,26 +8,6 @@ var currentImgPath;
 var currentQuote;
 
 
-// Facebook //////////////////////////////
-
-function shareOverrideOGMeta(overrideImage, quoteText, quoteAuthor)
-{
-	FB.ui({
-		method: 'share_open_graph',
-		action_type: 'og.shares',
-		action_properties: JSON.stringify({
-			object: {
-                'og:image': currentImgPath,
-                'og:description': quoteText + " " + quoteAuthor
-			}
-		})
-	},
-	function (response) {
-	// Action after response
-	});
-}
-
-
 
 /// Buttons ////////////////////////////////////////////////////////////////////////////
 
