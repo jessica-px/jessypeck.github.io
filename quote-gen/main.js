@@ -7,7 +7,46 @@ var currentImgData;
 var currentImgPath;
 var currentQuote;
 
-/// Buttons
+
+// Facebook //////////////////////////////
+
+window.fbAsyncInit = function() {
+FB.init({
+    appId            : '1966672460318665',
+    autoLogAppEvents : true,
+    xfbml            : true,
+    version          : 'v2.12'
+});
+FB.AppEvents.logPageView();
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+
+function shareOverrideOGMeta(overrideImage)
+{
+	FB.ui({
+		method: 'share_open_graph',
+		action_type: 'og.shares',
+		action_properties: JSON.stringify({
+			object: {
+				'og:image': currentImgPath
+			}
+		})
+	},
+	function (response) {
+	// Action after response
+	});
+}
+
+
+
+/// Buttons ////////////////////////////////////////////////////////////////////////////
 
 // "New Quote" Button
 $('.newBtn').on('click', function(){
@@ -175,7 +214,7 @@ function rejectQuote(){
 function showQuote(quoteText, quoteAuthor){
     waitingOnQuote = false;
     toggleLoader();
-    showImage(currentImgData, quoteText, quoteAuthor);
+    makeImage(currentImgData, quoteText, quoteAuthor);
 }
 
 
@@ -201,7 +240,7 @@ function getImageFromJSON(){
 }
 
 
-function showImage(imgData, quoteText, quoteAuthor){
+function makeImage(imgData, quoteText, quoteAuthor){
     img = new Image();
     img.src = imgData.path;
     img.onload = function(){
@@ -210,6 +249,7 @@ function showImage(imgData, quoteText, quoteAuthor){
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
         currentImgPath = document.getElementById("canvas").toDataURL();
         document.getElementById("quoteImg").src = currentImgPath;
+        shareOverrideOGMeta(currentImgPath);
     }
 }
 
