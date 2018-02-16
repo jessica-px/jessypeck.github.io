@@ -175,13 +175,17 @@ function rejectQuote(){
     console.log("REJECTED A QUOTE");
     setTimeout(function(){
         getQuoteFromAPI();
-    }, 100);
+    }, 10);
 }
 
 function showQuote(quoteText, quoteAuthor){
     waitingOnQuote = false;
-    toggleLoader();
     makeImage(currentImgData, quoteText, quoteAuthor);
+    setTimeout(function(){
+        document.getElementById("quoteImg").src = currentImgPath;
+        toggleLoader();
+    }, 500);
+    
 }
 
 
@@ -215,7 +219,7 @@ function makeImage(imgData, quoteText, quoteAuthor){
             canvas.height / 2 - img.height / 2, img.width, img.height);
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
         currentImgPath = document.getElementById("canvas").toDataURL();
-        document.getElementById("quoteImg").src = currentImgPath;
+        //document.getElementById("quoteImg").src = currentImgPath;
     }
 }
 
