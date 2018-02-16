@@ -92,33 +92,6 @@ nav a:hover{
     grid-row: 3;
     text-align: center;
 }
- /*
-.newBtn {
-    width: auto;
-    display: inline-block;
-    padding: 14px;
-    font-size: 16px;
-    letter-spacing: 1.5px;
-    color: white;
-    background: green;
-    border-style: none;
-    border-radius: 10px;
-    box-shadow: 0px 5px 0px 0px darkgreen;
-    outline: none;
-}
-
-.newBtn:hover{
-    background: rgb(11, 126, 11);
-    box-shadow: 0px 4px 0px 0px darkgreen;
-    transform: translateY(1px);
-}
-
-.newBtn:active{
-    box-shadow: 0px 2px 0px 0px darkgreen;
-    transform: translateY(3px);
-}
-
-*/
 
 .newBtn {
     width: 130px;
@@ -183,9 +156,9 @@ nav a:hover{
     width: 70px;
     font-size: 12px;
     letter-spacing: 1.2px;
-    color: #444;
+    color: #666;
     background: none;
-    border: 1px solid #444;
+    border: 1px solid #666;
     border-radius: 15px;
     outline: none;
     transition: .2s;

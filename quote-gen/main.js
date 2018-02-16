@@ -2,10 +2,12 @@
 var forismaticAPI = "https://api.forismatic.com/api/1.0/";
 var outputText = document.getElementById("output");
 var waitingOnQuote = false;
+var maxQuoteLength = 100;
 var canvasContext = document.getElementById("canvas").getContext("2d");
 var currentImgData;
 var currentImgPath;
 var currentQuote;
+var requestUrl = 'http://localhost/quote-gen/index.html/'
 
 
 
@@ -36,6 +38,26 @@ function toggleLoader(){
     buttonText.style.display = "block";
     loader.style.display = "none";
 }
+
+// Twitter Button
+$('.twitterShare').click(function(event){
+    event.preventDefault()
+    
+    //imageUid = getImageUIDFromUrl(currentImgPath);     <-- If I actually saved the images to a server,
+    //u = requestUrl + 'share?iuid=' + imageUid;             I could use something like this to include an image link!
+
+    var shareMessage = " - a cat quote from ";
+    window.open('https://twitter.com/share?url=&amp;name=CatQuotes&amp;hashtags=cats,quotes&amp;text=\"' + currentQuote + "\"" + shareMessage + ' &amp;')
+
+})
+
+//function getImageUIDFromUrl(url){
+//	split = url.split("/")
+//	imageUID = split[split.length - 2] + "/" + split[split.length - 1]
+//	return imageUID
+//}
+
+
 
 // "Save" Button
 function downloadImage(linkElement){
@@ -94,7 +116,7 @@ function filterQuotes(data){
 
 function filterQuoteLength(data){
     var quoteText = data.quoteText;
-     if(quoteText.length > 100){
+     if(quoteText.length > maxQuoteLength){
         return true;
      }
      return false;
