@@ -5,6 +5,8 @@
     <meta property="fb:app_id" content="1966672460318665" />
     <meta property="og:title"         content="Cat Quotes!" />
     <meta property="og:description"   content="A random generator for famous(?) inspirational cat quotes." />
+    <meta name="twitter:card" content="summary" />
+    
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -30,8 +32,11 @@
             <canvas id = "canvas" width = 600px height = 600px></canvas>
         </div>
         <div class = "buttonRow">
-            <button class = "newBtn">New Quote</button>
-            <div class="loader" id="loader"></div>
+            <button class = "newBtn" id = "newBtn">
+                <p id = "btnText">New Quote</p>
+                <div class="loader" id="loader"></div>
+            </button>
+            
         </div>
         <div class = "mediaRow">
             <a class="fb-share" href="#" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent('https://jessypeck.github.io/quote-gen/index.html'), 'facebook-share-dialog', 'width=626,height=436'); return false;">

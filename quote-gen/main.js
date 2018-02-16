@@ -22,24 +22,28 @@ $('.newBtn').on('click', function(){
     }
 });
 
+function toggleLoader(){
+    var button = document.getElementById("newBtn");
+    var buttonText = document.getElementById("btnText");
+    var loader = document.getElementById("loader");
+    
+    if (waitingOnQuote){
+        buttonText.style.display = "none";
+        loader.style.display = "block";
+
+        return;
+    }
+    buttonText.style.display = "block";
+    loader.style.display = "none";
+}
+
 // "Save" Button
 function downloadImage(linkElement){
     console.log("Downloading image...");
     linkElement.href = currentImgPath;
 };
 
-
 ///////////////////////////////////////////////////////////////////
-
-function toggleLoader(){
-    if (waitingOnQuote){
-        document.getElementById("loader").style.display = "block";
-        return;
-    }
-    document.getElementById("loader").style.display = "none";
-}
-
-
 
 
 function showErrorImage(){
@@ -212,7 +216,6 @@ function makeImage(imgData, quoteText, quoteAuthor){
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
         currentImgPath = document.getElementById("canvas").toDataURL();
         document.getElementById("quoteImg").src = currentImgPath;
-        shareOverrideOGMeta(currentImgPath, quoteText, quoteAuthor);
     }
 }
 
