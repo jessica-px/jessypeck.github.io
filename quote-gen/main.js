@@ -58,12 +58,24 @@ $('.twitterShare').click(function(event){
 //}
 
 
-
 // "Save" Button
 function downloadImage(linkElement){
     console.log("Downloading image...");
     linkElement.href = currentImgPath;
 };
+
+
+// Dropdown Button
+$('#dropdown').click(function(event){
+    var submenu = document.getElementById("sub-menu");
+    if (submenu.style.visibility == "hidden"){
+        console.log("Turning it visible...?!");
+        submenu.style.visibility = "visible";
+        return;
+    }
+    submenu.style.visibility = "hidden";
+})
+
 
 ///////////////////////////////////////////////////////////////////
 
