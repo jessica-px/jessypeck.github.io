@@ -5,12 +5,42 @@
         "textColor" : "dark"
     },
     {
+        "path" : "imgs/up-center/bg2.png",
+        "align" : "up-center",
+        "textColor" : "dark"
+    },
+    {
+        "path" : "imgs/up-center/bg3.png",
+        "align" : "up-center",
+        "textColor" : "light"
+    },
+    {
         "path" : "imgs/up-left/bg1.png",
         "align" : "up-left",
         "textColor" : "light"
     },
     {
+        "path" : "imgs/up-left/bg2.png",
+        "align" : "up-left",
+        "textColor" : "dark"
+    },
+    {
+        "path" : "imgs/up-left/bg3.png",
+        "align" : "up-left",
+        "textColor" : "light"
+    },
+    {
         "path" : "imgs/up-right/bg1.png",
+        "align" : "up-right",
+        "textColor" : "light"
+    },
+    {
+        "path" : "imgs/up-right/bg2.png",
+        "align" : "up-right",
+        "textColor" : "light"
+    },
+    {
+        "path" : "imgs/up-right/bg3.png",
         "align" : "up-right",
         "textColor" : "light"
     }

@@ -278,15 +278,15 @@ function drawQuoteOnImage(imgData, quoteText, quoteAuthor){
     if (imgData.align == "up-center"){
         canvasContext.textAlign = "center";
         canvasContext.font = "26px " + randomFont();
-        drawTextByLines(quoteText, quoteAuthor, 300, 40, 26, 350);
+        drawTextByLines(quoteText, quoteAuthor, 300, 40, 28, 350);
     }
     else if (imgData.align == "up-right"){
         canvasContext.textAlign = "right";
-        drawTextByLines(quoteText, quoteAuthor, 540, 40, 24, 250);
+        drawTextByLines(quoteText, quoteAuthor, 540, 40, 26, 250);
     }
     else if (imgData.align == "up-left"){
         canvasContext.textAlign = "left";
-        drawTextByLines(quoteText, quoteAuthor, 40, 40, 24, 250);
+        drawTextByLines(quoteText, quoteAuthor, 40, 40, 26, 250);
     }
 
 }
@@ -315,9 +315,11 @@ function drawTextByLines(text, quoteAuthor, xPos, yPos, fontSize, maxWidth){
         var currentLine = lines[x];
         //On final line, print author name in slightly smaller font
         if (x == lines.length -1){
-            canvasContext.fillStyle = "grey";
+            //canvasContext.fillStyle = "grey";
+            canvasContext.globalAlpha = 0.5;
             canvasContext.font = "16px Calibri";
             canvasContext.fillText(currentLine.text, xPos, yPos + currentLine.lineY +10);
+            canvasContext.globalAlpha = 1;
             break;
         }
         // Otherwise print like normal
