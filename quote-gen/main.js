@@ -313,7 +313,7 @@ function drawTextByLines(text, quoteAuthor, xPos, yPos, fontSize, maxWidth){
     lines = getTextLines(text, quoteAuthor, fontSize, maxWidth);
     for (var x = 0; x < lines.length; x++){
         var currentLine = lines[x];
-        //On final line, print author name in slightly smaller font
+        //On final line, print author name in 16px 50% opacity
         if (x == lines.length -1){
             //canvasContext.fillStyle = "grey";
             canvasContext.globalAlpha = 0.5;
