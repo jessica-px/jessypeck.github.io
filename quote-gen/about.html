@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<head>
+    <title>Cat Quotes</title>
+    <meta property="fb:app_id" content="1966672460318665" />
+    <meta property="og:title"         content="Cat Quotes!" />
+    <meta property="og:description"   content="A random generator for famous(?) inspirational cat quotes." />
+    <meta name="twitter:card" content="summary" />
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</head>
+
+<body>
+
+    <nav>
+        <div class = "header"><a href="http://localhost/quote-gen/index.html#">Cat Quotes</a></div>
+        <div class = "navLinks" id = "navWide">
+            <ul>
+                <li><a href =http://localhost/quote-gen/about.html>About</a></li>
+                <li><a href =http://localhost/quote-gen/contact.html>Contact</a></li>
+            </ul>
+        </div>
+        <div class = "navLinks" id = "navMobile">
+           <li id = "dropdown"><a><i class="fas fa-bars"></i></a>
+                <ul id="sub-menu">
+                    <a href="http://localhost/quote-gen/about.html"><li>About</li></a>
+                    <a href="http://localhost/quote-gen/contact.html"><li>Contact</li></a>
+                </ul>
+            </li>
+        </div>
+    </nav>
+
+    
+    <div class = "container">
+        <div class = "about-text">
+            <h1>About</h1>
+            <p>Built as front-end web development exercise, this is a random generator that makes sharable pictures of cat-related quotes. It uses Javascript
+                to retrieve real quotes from Forismatic, a third party API, and it then replaces various words to make the quotes
+                more cat-oriented. 
+            </p>
+            <p>Not every quote in the Forismatic database is suitable. Some of them are too long, and some of them are too difficult
+                    to catify. So each quote is passed through several filtering functions, and if they are rejected, the process starts
+                    over at the beginning. But the Forismatic API can only handle so many requests so quickly - to avoid overloading them,
+                    I've implemented a short mandatory waiting period between each quote attempt. A loading widget communicates this waiting
+                    period to the user.
+            </p>
+            <p>Once the quote is made, a random cat picture is selected from a JSON file. Each entry in this JSON file contains an image
+                path, as well as styling information such as whether the text should be dark or light, and where the text can be oriented.
+                With this information, the text and image are then combined via Javascript into an HTML canvas. A URL for the final image
+                is derived from that canvas, and finally the image is displayed on the website.
+            </p>
+            <p>The intention of this project is to make <em>sharable</em> pictures with cat quotes, but without back-end work, that's easier
+                said than done. Facebook sharing is formatted based on metadata that Facebook stores in its own servers. To share dynamicly created
+                content would require server-side scripting to force Facebook to update its metadata on the fly. So for the time being,
+                the Facebook "share" button woefully only shares a link to the homepage. Similarly, the Pinterest button is entirely non-functioning. 
+            </p>
+            <p>Using Javascript, I was able to allow the Twitter button to share the dynamically generated text quote, but because my dynamic
+                images are not stored server-side, the tweets cannot include a url to the actual image. The "save" button, however, works exactly
+                as planned, and downloads the finished image directly to the user's device.
+            </p>
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
