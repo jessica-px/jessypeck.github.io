@@ -9,8 +9,6 @@ var currentImgPath;
 var currentQuote;
 var requestUrl = 'http://localhost/quote-gen/index.html/'
 
-
-
 /// Buttons ////////////////////////////////////////////////////////////////////////////
 
 // "New Quote" Button
@@ -68,8 +66,12 @@ function downloadImage(linkElement){
 // Dropdown Button
 $('#dropdown').click(function(event){
     var submenu = document.getElementById("sub-menu");
+    if (submenu.style.visibility == ""){          // I don't know WHY, but if I don't set the visibility
+        submenu.style.visibility = "visible";     // via jScript, then it won't work. Even though I DID declare it in the CSS.
+        return;
+    }
+
     if (submenu.style.visibility == "hidden"){
-        console.log("Turning it visible...?!");
         submenu.style.visibility = "visible";
         return;
     }
