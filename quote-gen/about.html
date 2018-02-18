@@ -36,21 +36,42 @@
     <div class = "container">
         <div class = "about-text">
             <h1>About</h1>
-            <p>Built as front-end web development exercise, this is a random generator that makes sharable pictures of cat-related quotes. It uses Javascript
-                to retrieve real quotes from Forismatic, a third party API, and it then replaces various words to make the quotes
-                more cat-oriented. 
+            <p>Built as Javascript exercise, this is a random generator that makes sharable pictures of cat-related quotes.
             </p>
-            <p>Not every quote in the Forismatic database is suitable. Some of them are too long, and some of them are too difficult
+            <h3>Making the Quote</h3>
+            <p>This web app uses Javascript
+                    to retrieve real quotes from Forismatic, a third party API, and then replaces various words to make the quotes
+                    more cat-oriented.
+            </p>
+            <p>
+                Not every quote in the Forismatic database is suitable. Some of them are too long, and some of them are too difficult
                     to catify. So each quote is passed through several filtering functions, and if they are rejected, the process starts
                     over at the beginning. But the Forismatic API can only handle so many requests so quickly - to avoid overloading them,
                     I've implemented a short mandatory waiting period between each quote attempt. A loading widget communicates this waiting
                     period to the user.
             </p>
+            <p>
+                In an ideal implementation of this concept, quotes would be stored on our <em>own</em> server, so they could be
+                pre-filtered and catified, allowing for instant retrieval. This would also circumvent the occasional problems
+                 present the Forismatic API. (If you press the button and nothing happens, that's not a problem on 
+                my end - the Forismatic API has some poorly formatted entries that throw Javascript errors!)
+            </p>
+            <h3>Drawing the Quote &amp; Picture</h3>
             <p>Once the quote is made, a random cat picture is selected from a JSON file. Each entry in this JSON file contains an image
                 path, as well as styling information such as whether the text should be dark or light, and where the text can be oriented.
                 With this information, the text and image are then combined via Javascript into an HTML canvas. A URL for the final image
                 is derived from that canvas, and finally the image is displayed on the website.
             </p>
+            <p>
+                Using stylized fonts was a unique challenge in this project. Because the image is being generated
+                in the browser, all custom fonts used must be downloaded by the client. But browsers don't download
+                fonts until they're needed by the document, and my Javascript moves too quickly to download a font
+                mid-image generation. So at the very bottom of the HTML document is a little bit of text that uses
+                each of the four Google fonts used in my project. Immediatly upon loading, my Javascript hides this
+                text. Effectively it pre-loads the fonts without effecting the user experience. But again, ideally the
+                images would be created server-side, and this would not be necessary.
+            </p>
+            <h3>Social Media Sharing</h3>
             <p>The intention of this project is to make <em>sharable</em> pictures with cat quotes, but without back-end work, that's easier
                 said than done. Facebook sharing is formatted based on metadata that Facebook stores in its own servers. To share dynamicly created
                 content would require server-side scripting to force Facebook to update its metadata on the fly. So for the time being,
