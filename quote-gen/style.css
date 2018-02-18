@@ -1,3 +1,10 @@
+
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Signika');
+@import url('https://fonts.googleapis.com/css?family=Courgette');
+@import url('https://fonts.googleapis.com/css?family=Handlee');
+
+
 html, body{
     font-family: Calibri, sans-serif;
     margin: 0px;
@@ -220,6 +227,22 @@ nav a:hover{
     grid-row: 2;
     color: #EEE;
     padding: 0px 20px 0px 20px;
+}
+
+/* -------    FONT PRELOADING    -------*/
+
+#signikaFont{
+    font-family: "Signika";
+}
+#ubuntuFont{
+    font-family: "Ubuntu";
+}
+#courgetteFont{
+    font-family: "Courgette";
+}
+
+#handleeFont{
+    font-family: "Handlee";
 }
 
 

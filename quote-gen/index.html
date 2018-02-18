@@ -10,7 +10,6 @@
     <link rel="stylesheet" type="text/css" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-
 </head>
 
 <body>
@@ -68,8 +67,19 @@
     </div>
 
 
-    <!-- -------- Scripts ------------>
+    <!-- 
+        This section is just for pre-loading fonts, and its visibiility is set to "hidden".
+        See Javascript for full description.
+    -->
 
+    <div id = "fontLoader">
+            <div id = "signikaFont">Loading Font: Signika</div>     
+            <div id = "ubuntuFont">Loading Font: Ubuntu</div>
+            <div id = "courgetteFont">Loading Font: Courgette</div>
+            <div id = "handleeFont">Loading Font: Handlee</div>
+        </div>
+    
+    <!-- -------- Scripts ------------>
     <script>window.twttr = (function(d, s, id) {var js, fjs = d.getElementsByTagName(s)[0],t = window.twttr || {};if (d.getElementById(id)) return t;js = d.createElement(s);js.id = id;js.src = "https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js, fjs);t._e = [];t.ready = function(f) {t._e.push(f);};return t;}(document, "script", "twitter-wjs"));</script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="main.js"></script>

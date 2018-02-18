@@ -9,6 +9,9 @@ var currentImgPath;
 var currentQuote;
 var requestUrl = 'http://localhost/quote-gen/index.html/'
 
+
+
+
 /// Buttons ////////////////////////////////////////////////////////////////////////////
 
 // "New Quote" Button
@@ -268,7 +271,10 @@ function drawQuoteOnImage(imgData, quoteText, quoteAuthor){
     }
     canvasContext.textAlign = "center";
     canvasContext.textBaseline = "top";
-    canvasContext.font = "20px Arial";
+
+
+    canvasContext.font = "20px " + randomFont();
+    console.log("Current font: " + canvasContext.font);
     drawTextByLines(quoteText, quoteAuthor, 300, 80, 20, 250);
 
     if (imgData.align == "up-center"){
@@ -276,6 +282,21 @@ function drawQuoteOnImage(imgData, quoteText, quoteAuthor){
     }
 
 }
+function randomFont(){
+    var fonts = ["Arial", "Calibri", "Ubuntu", "Garamond", "Century Gothic",
+                "Signika", "Courgette", "Courier", "Handlee"]
+    var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+    console.log("Random font: " + randomFont);
+    return randomFont;
+}
+                                                                // An interesting conundrum! External fonts are only loaded when they're needed.
+document.onload = fontLoader();                                 // But these functions move too fast to load fonts on the fly. Ideally all of this
+function fontLoader(){                                          // would be done server-side, so the client doesn't have to download the fonts.
+    var fontLoader = document.getElementById("fontLoader");     // But in the meantime, I needed a way to pre-load fonts.
+    fontLoader.style.visibility = "hidden";                     // So the HTML contains some dummy text, and the CSS assigns it some Google fonts.
+}                                                               // But as soon as the JS loads, that text is hidden.
+                                                                // Effectively, this pre-loads the fonts so the image-making goes without a hitch.
+                                                                // But it's a bit hacky! 
 
 /// ---- TEXT WRAPPER ------------------------------------//////
 ///   Based on code from "Ash Blue" @ https://codepen.io/ashblue/pen/fGkma?editors=0010
@@ -289,7 +310,7 @@ function drawTextByLines(text, quoteAuthor, xPos, yPos, fontSize, maxWidth){
         if (x == lines.length -1){
             var authorFontSize = fontSize - 4 + "px";
             canvasContext.fillStyle = "grey";
-            canvasContext.font = authorFontSize + " Arial";
+            canvasContext.font = authorFontSize + " Calibri";
             canvasContext.fillText(currentLine.text, xPos, yPos + currentLine.lineY +10);
             break;
         }
