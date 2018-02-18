@@ -140,7 +140,7 @@ function filterQuoteLength(data){
 }
 
 function filterMoodRuiningQuotes(data){
-    if (data.quoteAuthor == "Donald Trump"){
+    if (data.quoteAuthor.indexOf("Trump") != -1){
         return true;
     }
     return false;
@@ -258,7 +258,6 @@ function makeImage(imgData, quoteText, quoteAuthor){
             canvas.height / 2 - img.height / 2, img.width, img.height);
         drawQuoteOnImage(imgData, quoteText, quoteAuthor);  
         currentImgPath = document.getElementById("canvas").toDataURL();
-        //document.getElementById("quoteImg").src = currentImgPath;
     }
 }
 
@@ -273,20 +272,28 @@ function drawQuoteOnImage(imgData, quoteText, quoteAuthor){
     canvasContext.textBaseline = "top";
 
 
-    canvasContext.font = "20px " + randomFont();
-    console.log("Current font: " + canvasContext.font);
-    drawTextByLines(quoteText, quoteAuthor, 300, 80, 20, 250);
+    canvasContext.font = "24px " + randomFont();
+    
 
     if (imgData.align == "up-center"){
-
+        canvasContext.textAlign = "center";
+        canvasContext.font = "26px " + randomFont();
+        drawTextByLines(quoteText, quoteAuthor, 300, 40, 26, 350);
+    }
+    else if (imgData.align == "up-right"){
+        canvasContext.textAlign = "right";
+        drawTextByLines(quoteText, quoteAuthor, 540, 40, 24, 250);
+    }
+    else if (imgData.align == "up-left"){
+        canvasContext.textAlign = "left";
+        drawTextByLines(quoteText, quoteAuthor, 40, 40, 24, 250);
     }
 
 }
 function randomFont(){
-    var fonts = ["Arial", "Calibri", "Ubuntu", "Garamond", "Century Gothic",
+    var fonts = ["Arial", "Calibri", "Ubuntu", "Century Gothic",
                 "Signika", "Courgette", "Courier", "Handlee"]
     var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
-    console.log("Random font: " + randomFont);
     return randomFont;
 }
                                                                 // An interesting conundrum! External fonts are only loaded when they're needed.
@@ -308,9 +315,8 @@ function drawTextByLines(text, quoteAuthor, xPos, yPos, fontSize, maxWidth){
         var currentLine = lines[x];
         //On final line, print author name in slightly smaller font
         if (x == lines.length -1){
-            var authorFontSize = fontSize - 4 + "px";
             canvasContext.fillStyle = "grey";
-            canvasContext.font = authorFontSize + " Calibri";
+            canvasContext.font = "16px Calibri";
             canvasContext.fillText(currentLine.text, xPos, yPos + currentLine.lineY +10);
             break;
         }
