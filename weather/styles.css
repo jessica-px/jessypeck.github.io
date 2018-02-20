@@ -4,8 +4,21 @@
   --lightblue: #4A7799;
 }
 
-body{
+html{
   height: 100%;
+}
+
+html, body{
+  margin: 0;
+  padding: 0;
+}
+
+body{
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr minmax(40px, auto);
+  grid-gap: 0;
   display: none;
   text-align: center;
   background-color: white;
@@ -14,9 +27,9 @@ body{
 }
 
 .container{
-  min-height: 100%;
+  grid-row: 1;
   display: grid;
-  grid-template-rows: 1fr;
+  grid-template-rows: auto auto auto;
   text-align: center;
   justify-items: center;
   align-items: center;
@@ -114,15 +127,13 @@ body{
 }
 
 .footer{
-  position:fixed;
-  bottom:0;
-  width:100%;
-  min-height: 40px;
+  grid-row: 2;
+  width: 100%;
+
   background-color: var(--darkblue);
   color: var(--lightblue);
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: minmax(40px, 1fr);
   align-items: center;
 }
 
