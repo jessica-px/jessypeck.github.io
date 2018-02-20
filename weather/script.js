@@ -84,8 +84,6 @@ function renderPage(){
   if (document.body.style.display != "grid"){
     console.log("Showing body");
     document.body.style.display = "grid";
-    //var bg = document.documentElement.style.getPropertyValue("--lightblue");
-    //document.body.style.backgroundColor = bg;
   }
 }
 
@@ -229,7 +227,16 @@ function getIcon(){
     var time = new Date() / 1000;
     var sunrise = currentWeatherData.sys.sunrise;
     var sunset = currentWeatherData.sys.sunset;
-    if (time >= sunrise && time < sunset ){
+    var oneDay = 86400;
+    if (time >= sunrise && time < sunset){
+      showDayColors();
+      return;
+    }
+    else if(time >= sunrise+oneDay && time < sunset+oneDay){
+      showDayColors();
+      return;
+    }
+    else if(time >= sunrise-oneDay && time < sunset-oneDay){
       showDayColors();
       return;
     }
