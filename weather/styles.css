@@ -21,7 +21,7 @@ body{
   grid-gap: 0;
   display: none;
   text-align: center;
-  background-color: white;
+  background-color: var(--lightblue);
   color: white;
   font-family: calibri;
 }

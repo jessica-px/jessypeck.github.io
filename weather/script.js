@@ -84,8 +84,8 @@ function renderPage(){
   if (document.body.style.display != "grid"){
     console.log("Showing body");
     document.body.style.display = "grid";
-    var bg = document.documentElement.style.getPropertyValue("--lightblue");
-    document.body.style.backgroundColor = bg;
+    //var bg = document.documentElement.style.getPropertyValue("--lightblue");
+    //document.body.style.backgroundColor = bg;
   }
 }
 
