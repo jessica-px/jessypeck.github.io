@@ -214,10 +214,14 @@ function getIcon(){
 
       if (minutes < 10){minutes = "0" + minutes;}
       var ampm = "am";
+      console.log("hours: " + hours);
       if (hours > 12){
-              hours -= 12;
-              ampm = "pm";
-          }
+        hours -= 12;
+        ampm = "pm";
+      }
+      if (hours == 0){
+        hours = 12;
+      }
       var formattedTime = hours + ":" + minutes + ampm;
       currentLocalTime = formattedTime;
       getCityInfo();
