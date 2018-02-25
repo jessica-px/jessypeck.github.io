@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+
 <head>
     <title>Wikipedia Search</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,30 +9,26 @@
 <body>
     <div class = "container">
         <div class = "header">Wikipedia Search</div>
-        <div class = "searchWrapper">
-          <input class = "searchBar" type="text" placeholder="Find Article...">
-          <div class = random></div>
-        </div>
-        <div class = "resultsGrid">
+        <form id = "searchWrapper" onsubmit="return false">
+          <input id = "searchBar" type="text" placeholder="Find Article..." />
+          <input type="submit" style="display: none" />
+          <a href = "https://www.wikipedia.org/wiki/Special:Random" target = "_blank">
+            <div class = random>?</div>
+          </a>
+        </form>
+        <div id = "resultsGrid">
+        <!-- ----Example Result----
           <div class = "resultCell">
             <div class ="resultTitle">Cat</div>
-            <div class="resultDescription">A cat is a feline. It likes to snuggle and will scream if you forget to feed it.</div>
+            <div class="resultDescription">The domestic cat (Felis silvestris catus or Felis catus) is a small, typically furry, carnivorous mammal.</div>
           </div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
-          <div class = "resultCell"></div>
+        -->
         </div>
-      </div>
+    
+    </div>
+    <div class = "footer">Made by <strong>Jessica Peck</strong> using the <a href = "https://www.mediawiki.org/wiki/API:Main_page"><strong>MediaWiki API</strong></a>.</div>
 
-    <!-- -------- Scripts ------------>
+    <!-- -------- Scripts ---------- -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="script.js"></script>
 
