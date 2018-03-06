@@ -1,21 +1,33 @@
-var equation;
+var equation = "0";
 var newEqu = true;
+var lastSymbol;
 var equDiv = document.getElementById("equation");
 var historyDiv = document.getElementById("history");
 var buttons = Array.from(document.getElementsByClassName("button"));
 
 function addToEquation(symb){
-    if (newEqu && !(symb == " × " || symb == " ÷ " || symb == " − " || symb == " ÷ " || symb == " + ")){
+    if (isOperation(symb) && lastSymbol == symb){
+        return;
+    }
+
+    if (newEqu && !isOperation(symb)){
         equation = "";
     }
+
     equation += symb;
+    lastSymbol = symb;
     equDiv.innerHTML = equation;
     newEqu = false;
+}
+
+function isOperation(symb){
+    return symb == " × " || symb == " ÷ " || symb == " − " || symb == " ÷ " || symb == " + " || symb == ".";
 }
 
 function clearEquation(){
     historyDiv.innerHTML = "";
     equation = "0";
+    lastSymbol = "";
     equDiv.innerHTML = equation;
     newEqu = true;
 }
@@ -24,7 +36,6 @@ function endEquation(){
     historyDiv.innerHTML = equation + " =";
     equation = getAnswer(); 
     equDiv.innerHTML = equation;
-    //newEqu = true;
 }
 
 function addExponent(){
