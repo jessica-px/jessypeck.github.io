@@ -7,14 +7,15 @@ export default {
 }
 
 function toggle(){
-    console.log("Toggling comp turn!");
     this.isTurn = !this.isTurn;
     if (this.isTurn){
-        setTimeout(function(){compTurn()}, 300)
+        game.setMessage("Computer's Turn");
+        setTimeout(function(){compTurn()}, 600)
     }
 }
 
 function compTurn(){
     console.log("Comp took its turn!");
+
     game.toggleTurns();
 }

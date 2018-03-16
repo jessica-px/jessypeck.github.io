@@ -72,7 +72,7 @@ html, body{
     transform: translateY(0px);
 }
 
-.message-row{
+#message-row{
     font-size: 2.4rem;
     font-family: Shrikhand;
     color: yellow;

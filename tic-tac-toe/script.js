@@ -22,6 +22,7 @@ var domElements = {
     tiles: document.getElementsByClassName("game-cell"),
     xBtn: document.getElementById("x-btn"),
     oBtn: document.getElementById("o-btn"),
+    message: document.getElementById("message-row"),
 }
 
 var game = {
@@ -40,6 +41,9 @@ var game = {
     toggleTurns: function(){
         player.toggleTurn();
         computer.toggleTurn();
+    },
+    setMessage: function(message){
+        dom.message.innerHTML = message;
     }
 
 }
@@ -49,6 +53,7 @@ var player = {
     isTurn: true,
     toggleTurn: function(){
         this.isTurn = !this.isTurn;
+        game.setMessage("Your Turn");
     }
 }
 
