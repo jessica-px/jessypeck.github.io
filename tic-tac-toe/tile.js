@@ -15,8 +15,10 @@ export default class Tile {
     }
 
     playerClick(){
-        if (this.value == "empty"){
+        if (this.value == "empty" && player.isTurn){
+            // AND if is player turn
             this.setValue(player.value);
+            game.toggleTurns();
         }
     }
 

@@ -1,5 +1,7 @@
 
 import Tile from './tile.js';
+import comp from './computer.js';
+import computer from './computer.js';
 export {game,player};
 
 var dom;
@@ -34,12 +36,20 @@ var game = {
             tile.setValue("empty");
             this.newGame = true;
         }
+    },
+    toggleTurns: function(){
+        player.toggleTurn();
+        computer.toggleTurn();
     }
+
 }
 
 var player = {
     value: "x",
     isTurn: true,
+    toggleTurn: function(){
+        this.isTurn = !this.isTurn;
+    }
 }
 
 function bindListeners(){
@@ -59,7 +69,7 @@ function buildTiles(){
 
 function playerValueBtn(btn, otherBtn, value){
     if (!game.newGame){
-        console.log("POP-UP: Begin new game?");
+        // Potentially: a confirmation pop-up asking, "Begin new game?"
         game.restart();
     }
     otherBtn.classList.remove("b-down");
@@ -67,10 +77,8 @@ function playerValueBtn(btn, otherBtn, value){
     btn.classList.remove("b-up");
     btn.classList.add("b-down");
     player.value = value;
-
-
-
 }
+
 
 
 
