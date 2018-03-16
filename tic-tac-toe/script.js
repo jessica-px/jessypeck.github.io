@@ -1,4 +1,8 @@
 
+import Tile from './tile.js';
+export {game,player};
+
+var dom;
 var gridSize = 3;
 
 document.addEventListener("DOMContentLoaded", function(event) {
@@ -7,20 +11,16 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 function init() {
     console.log("INIT");
+    dom = domElements;
+    bindListeners();
     buildTiles();
 }
 
 var domElements = {
     tiles: document.getElementsByClassName("game-cell"),
-
+    xBtn: document.getElementById("x-btn"),
+    oBtn: document.getElementById("o-btn"),
 }
-
-function buildTiles(){
-    for (let i = 0; i < domElements.tiles.length; i++){
-        let tile = new Tile(i);
-    }
-}
-
 
 var game = {
     tiles: domElements.tiles,
@@ -30,53 +30,35 @@ var game = {
     axes:[],
 }
 
-
 var player = {
     value: "x",
     isTurn: true,
 }
 
-class Tile {
-    constructor(index) {
-        this.div = game.tiles[index];
-        this.index = index;
-        this.value = "empty";
-        this.addListener();
-        this.updateGraphic();
+function bindListeners(){
+    dom.xBtn.addEventListener("click", function() {
+        playerValueBtn(dom.xBtn, dom.oBtn, "x");});
+    dom.oBtn.addEventListener("click", function() {
+        playerValueBtn(dom.oBtn, dom.xBtn, "o");});
+}
+
+function buildTiles(){
+    for (let i = 0; i < dom.tiles.length; i++){
+        let tile = new Tile(i);
     }
+}
 
-    addListener() {
-        this.div.addEventListener("click", this.playerClick.bind(this));
-    }
-
-    playerClick(){
-        if (this.value == "empty"){
-            this.setValue(player.value);
-        }
-    }
-
-    setValue(newValue){
-        this.value = newValue;
-        this.updateGraphic();
-    }
-
-    updateGraphic(){
-        switch(this.value){
-            case "empty": 
-                this.div.innerHTML = "";
-                this.div.classList.add("cell-valid");
-                break;
-            case "x":
-                this.div.classList.remove("cell-valid");
-                this.div.innerHTML = '<div class = "cell-inner"><i class="fas fa-times"></i></div>';
-                break;
-            case "o":
-                this.div.classList.remove("cell-valid");
-                this.div.innerHTML = '<div class = "cell-inner"><i class="far fa-circle"></i></div>';
- 
-        }
-    }
+function playerValueBtn(btn, otherBtn, value){
+    // Add condition: if any moves have been made, show
+    // a pop-up requestin, "Restart game?"
+    otherBtn.classList.remove("b-down");
+    otherBtn.classList.add("b-up");
+    btn.classList.remove("b-up");
+    btn.classList.add("b-down");
+    player.value = value;
+}
 
 
-  }
+
+
 
