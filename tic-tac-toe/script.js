@@ -23,11 +23,18 @@ var domElements = {
 }
 
 var game = {
-    tiles: domElements.tiles,
+    tiles: [],
+    newGame: true,
     rows: [],
     cols: [],
     diags: [],
     axes:[],
+    restart: function(){
+        for (let tile of this.tiles){
+            tile.setValue("empty");
+            this.newGame = true;
+        }
+    }
 }
 
 var player = {
@@ -44,18 +51,25 @@ function bindListeners(){
 
 function buildTiles(){
     for (let i = 0; i < dom.tiles.length; i++){
-        let tile = new Tile(i);
+        let div = dom.tiles[i];
+        let tile = new Tile(div);
+        
     }
 }
 
 function playerValueBtn(btn, otherBtn, value){
-    // Add condition: if any moves have been made, show
-    // a pop-up requestin, "Restart game?"
+    if (!game.newGame){
+        console.log("POP-UP: Begin new game?");
+        game.restart();
+    }
     otherBtn.classList.remove("b-down");
     otherBtn.classList.add("b-up");
     btn.classList.remove("b-up");
     btn.classList.add("b-down");
     player.value = value;
+
+
+
 }
 
 

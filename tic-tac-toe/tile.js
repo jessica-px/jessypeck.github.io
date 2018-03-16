@@ -2,12 +2,12 @@
 import {game,player} from './script.js';
 
 export default class Tile {
-    constructor(index) {
-        this.div = game.tiles[index];
-        this.index = index;
+    constructor(div) {
+        this.div = div;
         this.value = "empty";
         this.addListener();
         this.updateGraphic();
+        game.tiles.push(this);
     }
 
     addListener() {
@@ -21,6 +21,7 @@ export default class Tile {
     }
 
     setValue(newValue){
+        game.newGame = false;
         this.value = newValue;
         this.updateGraphic();
     }
