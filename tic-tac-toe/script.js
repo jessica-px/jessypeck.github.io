@@ -1,7 +1,6 @@
 
 import Tile from './tile.js';
-import comp from './computer.js';
-import computer from './computer.js';
+import {computer} from './computer.js';
 export {game,player};
 
 var dom;
@@ -101,6 +100,7 @@ function playerValueBtn(btn, otherBtn, value){
     btn.classList.remove("b-up");
     btn.classList.add("b-down");
     player.value = value;
+    computer.value = (value == "x")? "o" : "x";
 }
 
 
