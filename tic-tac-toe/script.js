@@ -22,6 +22,9 @@ var domElements = {
     xBtn: document.getElementById("x-btn"),
     oBtn: document.getElementById("o-btn"),
     message: document.getElementById("message-row"),
+    playerScore: document.getElementById("score-player"),
+    compScore: document.getElementById("score-comp"),
+    drawScore: document.getElementById("score-draw"),
 }
 
 var game = {
@@ -31,19 +34,32 @@ var game = {
     cols: [],
     diags: [],
     axes:[],
-    restart: function(){
-        for (let tile of this.tiles){
-            tile.setValue("empty");
-            this.newGame = true;
-        }
-    },
+    getValues: getTileValues,
+    playerScore: 0,
+    compScore: 0,
+    drawScore: 0,
     toggleTurns: function(){
-        console.log("GAME TOGGLE");
         player.toggleTurn();
         computer.toggleTurn();
     },
     setMessage: function(message){
         dom.message.innerHTML = message;
+    },
+    setScore: function(){
+        dom.playerScore.innerHTML = "Player: " + this.playerScore;
+        dom.drawScore.innerHTML = "Draws: " + this.drawScore;
+        dom.compScore.innerHTML = "Computer: " + this.compScore;
+    },
+    endTurn: function(){
+        let win = checkWin();
+        if (win != false){
+            processWin(win);
+            return;
+        }
+        else{
+            player.toggleTurn();
+            computer.toggleTurn();
+        }
     }
 
 }
@@ -92,24 +108,82 @@ function buildAxes(){
 
 
 function playerValueBtn(btn, otherBtn, value){
-    if (!game.newGame){
-        // Potentially: a confirmation pop-up asking, "Begin new game?"
-        game.restart();
-    }
     otherBtn.classList.remove("b-down");
     otherBtn.classList.add("b-up");
     btn.classList.remove("b-up");
     btn.classList.add("b-down");
     player.value = value;
     computer.value = (value == "x")? "o" : "x";
-    if (computer.value == "x"){
-        game.toggleTurns();
-    }
+    restart();
+}
 
+function restart(){
+    game.newGame = true;
+    readyPlayerOne();
+    for (let tile of game.tiles){
+        tile.setValue("empty");
+    }
+}
+
+function readyPlayerOne(){
+    if (computer.value == "x"){
+        player.isTurn = false;
+        computer.begin();
+    }
+    else{
+        computer.isTurn = false;
+        player.isTurn = true;
+    }
 }
 
 
 
+function checkWin(){
+    for (let axis of game.axes){
+        for (let line of axis){
+            let tileValues = game.getValues(line);
+            if (countInArray(tileValues, player.value) == 3){
+                game.playerScore+= 1;
+                console.log("PLAYER WINS");
+                return line;
+            }
+            if (countInArray(tileValues, computer.value) == 3){
+                game.compScore += 1;
+                console.log("COMPUTER WINS");
+                return line;
+            }
+        }
+    }
+    return false;
+}
+
+function processWin(winningLine){
+    game.setScore();
+    player.isTurn = false;
+    computer.isTurn = false;
+    highlightLine(winningLine);
+    setTimeout(function(){restart()}, 1000);
+}
+
+function highlightLine(line){
+    for(let tile of line){
+        tile.div.style.color = "yellow";
+    }
+}
+
+
+function getTileValues(tiles){
+    let values = [];
+    for (let i = 0; i < tiles.length; i++){
+        //console.log(tile);
+        values.push(tiles[i].value);
+    }
+    return values;
+}
+
+function countInArray(array, value){
+    return array.filter(item => item == value).length;
+}
 
 
 

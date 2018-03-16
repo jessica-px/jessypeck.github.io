@@ -3,22 +3,43 @@ import {game} from './script.js';
 export var computer = {
     value: "o",
     isTurn: false,
+    turnPending: false,
     toggleTurn: toggle,
+    begin: beginTurn
 }
+
 
 function toggle(){
     this.isTurn = !this.isTurn;
     if (this.isTurn){
-        game.setMessage("Computer's Turn");
-        setTimeout(function(){compTurn()}, 600)
-        console.log("Comp turn: BEGIN");
+        this.begin();
     }
 }
 
+function beginTurn(){
+    game.setMessage("Computer's Turn");
+    this.isTurn = true;
+    this.turnPending = true;
+    setTimeout(function(){compTurn()}, 600)
+    console.log("Comp turn: BEGIN");
+}
+
 function compTurn(){
-    let chosenTile = chooseMove();
-    chosenTile.setValue(computer.value);
-    game.toggleTurns();
+    if (computer.isTurn){
+        console.log("Choosing tile...");
+        let chosenTile = chooseMove();
+        chosenTile.setValue(computer.value);
+        endTurn();
+        return;
+    }
+    else{
+        console.log("CANCELLING TURN");
+    }
+}
+
+function endTurn(){
+    game.endTurn();
+    computer.turnPending = false;
     console.log("Comp ended its turn!");
 }
 
@@ -44,7 +65,7 @@ function chooseMove(){
 function findWinngMoveFor(value){
     for (let axis of game.axes){
         for (let line of axis){
-            let tileValues = getValues(line);
+            let tileValues = game.getValues(line);
             if (countInArray(tileValues, value) == 2 
             && tileValues.includes("empty")){
                 var nextMove = line[tileValues.indexOf("empty")];
@@ -56,23 +77,8 @@ function findWinngMoveFor(value){
 }
 
 function findRandomTile(){
-    var tile = null;
-    while (!tile){
-        let randTile = game.tiles[Math.floor(Math.random()*game.tiles.length)];
-        if (randTile.value == "empty"){
-            tile = randTile;
-            return tile;
-        }
-    }
-}
-
-function getValues(tiles){
-    let values = [];
-    for (let i = 0; i < tiles.length; i++){
-        //console.log(tile);
-        values.push(tiles[i].value);
-    }
-    return values;
+    let emptyTiles = game.tiles.filter(tile => tile.value == "empty");
+    return emptyTiles[Math.floor(Math.random()*emptyTiles.length)];
 }
 
 function countInArray(array, value){

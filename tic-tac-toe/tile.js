@@ -15,9 +15,8 @@ export default class Tile {
 
     playerClick(){
         if (this.value == "empty" && player.isTurn){
-            // AND if is player turn
             this.setValue(player.value);
-            game.toggleTurns();
+            game.endTurn();
         }
     }
 
@@ -30,6 +29,7 @@ export default class Tile {
     updateGraphic(){
         switch(this.value){
             case "empty": 
+                this.div.style.color = "black";
                 this.div.classList.add("cell-valid");
                 this.div.innerHTML = "";
                 break;
