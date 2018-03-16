@@ -7,7 +7,6 @@ export default class Tile {
         this.value = "empty";
         this.addListener();
         this.updateGraphic();
-        game.tiles.push(this);
     }
 
     addListener() {

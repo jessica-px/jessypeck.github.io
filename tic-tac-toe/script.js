@@ -68,9 +68,28 @@ function buildTiles(){
     for (let i = 0; i < dom.tiles.length; i++){
         let div = dom.tiles[i];
         let tile = new Tile(div);
-        
+        game.tiles.push(tile);
     }
+    buildAxes();
 }
+
+function buildAxes(){
+    for (let i = 0; i <= 6; i+=3){
+        let row = [game.tiles[i], game.tiles[i+1], game.tiles[i+2]];
+        game.rows.push(row);
+    }
+    for (let i = 0; i < 3; i++){
+        let col = [game.tiles[i], game.tiles[i+3], game.tiles[i+6]];
+        game.cols.push(col);
+    }
+    var diag1 = [game.tiles[0], game.tiles[4], game.tiles[8]];
+    var diag2 = [game.tiles[2], game.tiles[4], game.tiles[6]];
+    game.diags.push(diag1, diag2);
+    game.axes.push(game.rows, game.cols, game.diags);
+}
+
+
+
 
 function playerValueBtn(btn, otherBtn, value){
     if (!game.newGame){
