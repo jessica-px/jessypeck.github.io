@@ -38,6 +38,7 @@ var game = {
         }
     },
     toggleTurns: function(){
+        console.log("GAME TOGGLE");
         player.toggleTurn();
         computer.toggleTurn();
     },
@@ -101,6 +102,10 @@ function playerValueBtn(btn, otherBtn, value){
     btn.classList.add("b-down");
     player.value = value;
     computer.value = (value == "x")? "o" : "x";
+    if (computer.value == "x"){
+        game.toggleTurns();
+    }
+
 }
 
 
