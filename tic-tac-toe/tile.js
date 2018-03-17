@@ -1,5 +1,6 @@
 
-import {game,player} from './script.js';
+import {player} from './player.js';
+import {game} from './game.js';
 
 export default class Tile {
     constructor(div) {
@@ -14,10 +15,7 @@ export default class Tile {
     }
 
     playerClick(){
-        if (this.value == "empty" && player.isTurn){
-            this.setValue(player.value);
-            game.endTurn();
-        }
+        game.playerPlaceTile(this);
     }
 
     setValue(newValue){
