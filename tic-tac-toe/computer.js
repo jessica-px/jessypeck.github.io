@@ -29,6 +29,7 @@ function beginTurn(){
 
 function compTurn(){
     if (computer.isTurn){
+        game.stopAudio();
         computer.audio.play();
         let chosenTile = chooseMove();
         chosenTile.setValue(computer.value);

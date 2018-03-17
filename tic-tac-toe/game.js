@@ -18,6 +18,8 @@ export var game = {
     compScore: 0,
     drawScore: 0,
 
+    stopAudio: stopAudio,
+
     setPlayerValue: function(value){
         player.value = value;
         computer.value = (value == "x")? "o" : "x";
