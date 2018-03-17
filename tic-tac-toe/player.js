@@ -6,5 +6,6 @@ export var player = {
     toggleTurn: function(){
         this.isTurn = !this.isTurn;
         game.setMessage("Your Turn");
-    }
+    },
+    audio: new Audio('audio/good-blop.wav')
 }

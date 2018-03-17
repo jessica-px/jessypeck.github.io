@@ -1,11 +1,14 @@
 import {game} from './game.js';
 
+var turnWaitTime = 800;
+
 export var computer = {
     value: "o",
     isTurn: false,
     turnPending: false,
     toggleTurn: toggle,
-    begin: beginTurn
+    begin: beginTurn,
+    audio: new Audio('audio/bad-blop.wav')
 }
 
 
@@ -20,26 +23,27 @@ function beginTurn(){
     game.setMessage("Computer's Turn");
     this.isTurn = true;
     this.turnPending = true;
-    setTimeout(function(){compTurn()}, 600)
-    console.log("Comp turn: BEGIN");
+    setTimeout(function(){compTurn()}, turnWaitTime)
+    //console.log("Comp turn: BEGIN");
 }
 
 function compTurn(){
     if (computer.isTurn){
+        computer.audio.play();
         let chosenTile = chooseMove();
         chosenTile.setValue(computer.value);
         endTurn();
         return;
     }
     else{
-        console.log("CANCELLING TURN");
+        //console.log("CANCELLING TURN");
     }
 }
 
 function endTurn(){
     game.endTurn();
     computer.turnPending = false;
-    console.log("Comp ended its turn!");
+    //console.log("Comp ended its turn!");
 }
 
 function chooseMove(){

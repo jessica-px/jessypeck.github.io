@@ -3,6 +3,10 @@ import {computer} from './computer.js';
 import {player} from './player.js';
 import {domElements as dom} from './script.js';
 
+var winAudio = new Audio('audio/good-tune.wav');
+var loseAudio = new Audio('audio/bad-tune.wav');
+var timeBetweenRounds = 1400;
+
 export var game = {
     tiles: [],
     rows: [],
@@ -22,6 +26,8 @@ export var game = {
 
     playerPlaceTile: function(tile){
         if (tile.value == "empty" && player.isTurn){
+            stopAudio();
+            player.audio.play();
             tile.setValue(player.value);
             game.endTurn();
         }
@@ -44,6 +50,13 @@ export var game = {
 
 }
 
+function stopAudio(){
+    player.audio.pause();
+    player.audio.currentTime = 0;
+    computer.audio.pause();
+    computer.audio.currentTime = 0;
+}
+
 
 function restart(){
     for (let tile of game.tiles){
@@ -60,6 +73,7 @@ function readyPlayerOne(){
     else{
         computer.isTurn = false;
         player.isTurn = true;
+        game.setMessage("Your Turn");
     }
 }
 
@@ -69,12 +83,18 @@ function checkWin(){
             let tileValues = game.getValues(line);
             if (countInArray(tileValues, player.value) == 3){
                 game.playerScore+= 1;
+                stopAudio();
+                winAudio.play();
                 highlightLine(line);
+                game.setMessage("You Win!");
                 return true;
             }
             if (countInArray(tileValues, computer.value) == 3){
                 game.compScore += 1;
+                stopAudio();
+                loseAudio.play();
                 highlightLine(line);
+                game.setMessage("You Lose");
                 return true;
             }
         }
@@ -85,8 +105,10 @@ function checkDraw(){
     let tileValues = game.getValues(game.tiles);
     //console.log(tileValues);
     if (tileValues.includes("empty") == false){
-        console.log("It's a draw!");
+        stopAudio();
+        loseAudio.play();
         game.drawScore+= 1;
+        game.setMessage("Draw");
         return true;
     }
 }
@@ -95,7 +117,7 @@ function endRound(){
     setScore();
     player.isTurn = false;
     computer.isTurn = false;
-    setTimeout(function(){restart()}, 1000);
+    setTimeout(function(){restart()}, timeBetweenRounds);
 }
 
 function highlightLine(line){
