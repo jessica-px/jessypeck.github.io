@@ -26,7 +26,6 @@ function beginTurn(){
 
 function compTurn(){
     if (computer.isTurn){
-        console.log("Choosing tile...");
         let chosenTile = chooseMove();
         chosenTile.setValue(computer.value);
         endTurn();
@@ -46,17 +45,17 @@ function endTurn(){
 function chooseMove(){
     if (findWinngMoveFor(computer.value) != null){
         let winningMove = findWinngMoveFor(computer.value);
-        console.log("Choosing WINNING move");
+        //console.log("Choosing WINNING move");
         return winningMove;
     }
     let playerValue = (computer.value == "x")? "o" : "x";
     if(findWinngMoveFor(playerValue) != null){
         let blockMove = findWinngMoveFor(playerValue);
-        console.log("Blocking Player Win");
+        //console.log("Blocking Player Win");
         return blockMove;
     }
     else{
-        console.log("Choosing random move");
+        //console.log("Choosing random move");
         let randomMove = findRandomTile();
         return randomMove;
     }

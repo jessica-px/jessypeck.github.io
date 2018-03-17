@@ -32,9 +32,8 @@ export var game = {
     },
 
     endTurn: function(){
-        let win = checkWin();
-        if (win != false){
-            processWin(win);
+        if (checkWin() || checkDraw()){
+            endRound();
             return;
         }
         else{
@@ -70,24 +69,32 @@ function checkWin(){
             let tileValues = game.getValues(line);
             if (countInArray(tileValues, player.value) == 3){
                 game.playerScore+= 1;
-                console.log("PLAYER WINS");
-                return line;
+                highlightLine(line);
+                return true;
             }
             if (countInArray(tileValues, computer.value) == 3){
                 game.compScore += 1;
-                console.log("COMPUTER WINS");
-                return line;
+                highlightLine(line);
+                return true;
             }
         }
     }
-    return false;
 }
 
-function processWin(winningLine){
+function checkDraw(){
+    let tileValues = game.getValues(game.tiles);
+    //console.log(tileValues);
+    if (tileValues.includes("empty") == false){
+        console.log("It's a draw!");
+        game.drawScore+= 1;
+        return true;
+    }
+}
+
+function endRound(){
     setScore();
     player.isTurn = false;
     computer.isTurn = false;
-    highlightLine(winningLine);
     setTimeout(function(){restart()}, 1000);
 }
 
