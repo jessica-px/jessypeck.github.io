@@ -3,6 +3,7 @@ var synth = new Tone.Synth().toMaster()
 var noteDuration = "8n"; // an 8th note
 
 var whiteKeys = [];
+var blackKeys = [];
 
 document.addEventListener("DOMContentLoaded", function(event) {
     init();
@@ -11,17 +12,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 function init() {
     console.log("INIT");
     buildPianoKeys();
-}
-
-var domElements = {
-    whiteKey1: document.getElementById("whiteKey1"),
-    whiteKey2: document.getElementById("whiteKey2"),
-    whiteKey3: document.getElementById("whiteKey3"),
-    whiteKey4: document.getElementById("whiteKey4"),
-    whiteKey5: document.getElementById("whiteKey5"),
-    whiteKey6: document.getElementById("whiteKey6"),
-    whiteKey7: document.getElementById("whiteKey7"),
-
+    buildBlackKeys();
 }
 
 function buildPianoKeys(){
@@ -34,6 +25,15 @@ function buildPianoKeys(){
     console.log(whiteKeys);
 }
 
+function buildBlackKeys(){
+    var divs = document.getElementsByClassName("piano-black");
+    var notes = ["c#4", "d#4", "f#4", "g#4", "Bb4"];
+    for (let i = 0; i < divs.length; i++){
+        let newKey = new PianoKey(notes[i], divs[i]);
+        blackKeys.push(newKey);
+    }
+    console.log(blackKeys);
+}
 
 class PianoKey{
     constructor(noteName, div) {
