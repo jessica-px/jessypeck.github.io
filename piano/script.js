@@ -43,13 +43,17 @@ class PianoKey{
     }
 
     addListener(){
-        this.div.addEventListener("mousedown", this.playTone.bind(this));
+        this.div.addEventListener("mousedown", this.startTone.bind(this));
         this.div.addEventListener("mouseup", this.endTone.bind(this));
         this.div.addEventListener("mouseout", this.endTone.bind(this));
     }
 
-    playTone(){
+    startTone(){
         synth.triggerAttack(this.noteName);
+    }
+
+    playTone(){
+        synth.triggerAttackRelease(this.noteName, noteDuration);
     }
 
     endTone(){
