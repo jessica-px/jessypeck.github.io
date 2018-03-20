@@ -38,6 +38,14 @@ class PianoKey{
     endTone(){
         synth.triggerRelease();
     }
+
+    keepDivPressedFor(duration){
+        let div = this.div;
+        div.classList.add("active");
+        setTimeout(function timeoutHandler(){
+            div.classList.remove("active");
+        }, duration);
+    }
 }
 
 function buildWhiteKeys(){

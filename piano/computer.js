@@ -37,6 +37,7 @@ function playNoteInSequence(index){
     let note = sequence[index];
     let key = piano.getKey(note);
     key.playTone();
+    key.keepDivPressedFor(noteLength-100);
 }
 
 

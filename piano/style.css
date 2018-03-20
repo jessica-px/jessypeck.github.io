@@ -1,6 +1,7 @@
 
 :root {
     --background: rgb(104, 104, 104);
+    --highlightColor: green;
 }
 
 html, body{
@@ -67,17 +68,18 @@ html, body{
     pointer-events: all;
 }
 
-.key:active{
+.white-key:active, .white-key.active{
     transform-origin: top;
     box-shadow: 0 0px transparent;
-}
-
-.white-key:active{
     transform: scaleY(1.025);
+    background-color: var(--highlightColor);
 }
 
-.black-key:active{
+.black-key:active, .black-key.active{
+    transform-origin: top;
+    box-shadow: 0 0px transparent;
     transform: scaleY(1.04);
+    background-color: var(--highlightColor);
 }
 
 .piano-gap{
