@@ -16,7 +16,7 @@ html, body{
 
 .container{
     display: grid;
-    grid-template-rows: 1fr 300px 30px 90px 1fr;
+    grid-template-rows: 1fr 300px 30px auto 1fr;
     grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     height: 100%;
     font-size: 1.2rem;
@@ -25,10 +25,9 @@ html, body{
 .ui-row{
     grid-area: 4/2;
     display: grid;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-    "strict-title   start   key-title"
     "strict         start   key";
 }
 
@@ -44,7 +43,7 @@ html, body{
 
 #key-letter{
     grid-area: letter;
-    font-size: 2rem;
+    font-size: 3.0rem;
 }
 
 #major{
@@ -55,10 +54,19 @@ html, body{
     grid-area: minor;
 }
 
-.arrows{
+.arrowWrapper{
     grid-area: arrows;
+    font-size: 3.2rem;
 }
 
+.arrow{
+    padding: 0 10px 0 10px;
+}
+
+.arrow:hover{
+    color: red;
+    cursor: pointer;
+}
 
 
 .start{
@@ -89,32 +97,36 @@ html, body{
     background-color: var(--highlightColor);
 }
 
-.title-strict, .title-key{
-    font-size: 1.6rem;
-}
-
 .strict{
     grid-area: strict;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
 }
 
 .toggle{
     cursor: pointer;
-    padding: 10px;
+    padding: 5px;
+    margin: 2px;
     color: rgb(41, 41, 41);
     font-size: 1.8rem;
+    /* background-color: rgb(71, 71, 71); */
+    border: 2px solid rgb(71, 71, 71);
+    border-radius: 10px;
 }
 
-.toggle:hover{
-    text-decoration: underline;
-}
 
 .toggle.toggle-active{
     color: rgb(26, 26, 26);
+    background-color: rgb(71, 71, 71);
     font-weight: bold;
 }
+
+.toggle:hover{
+    background-color: rgb(117, 117, 117);
+}
+
 
 #piano-freeze{
     display: none;
