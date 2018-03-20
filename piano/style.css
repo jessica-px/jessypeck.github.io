@@ -21,7 +21,21 @@ html, body{
     height: 100%;
 }
 
-.piano{
+#piano-freeze{
+    display: none;
+    grid-area: 2/2;
+    z-index: 3;
+    width: 100%;
+    height: 100%;
+}
+
+#piano-freeze.enabled{
+    display: block;
+}
+
+
+
+.piano-white{
     grid-area: 2/2;
     display: grid;
     grid-template-rows: 3px 1fr;
@@ -120,6 +134,10 @@ html, body{
 
 .black-key:hover, .black-key:active, .black-key.active{
     background-color: rgb(77, 77, 77);
+}
+
+.frozen{
+    pointer-events: none;
 }
 
 @media (hover){

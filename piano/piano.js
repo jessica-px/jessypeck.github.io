@@ -10,8 +10,8 @@ var piano = {
         buildWhiteKeys();
         buildBlackKeys();
     },
-    playNote : playNote
-
+    playNote : playNote,
+    toggleFreeze : toggleFreeze
 }
 
 class PianoKey{
@@ -77,4 +77,9 @@ function playNote(note, duration){
 function getKey(note){
     let thisKey = piano.keys.filter(key => key.noteName == note);
     return thisKey[0];
+}
+
+function toggleFreeze(){
+    var freeze = document.getElementById("piano-freeze");
+    freeze.classList.toggle("enabled");
 }

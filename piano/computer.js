@@ -26,17 +26,24 @@ function buildSequence(){
 }
 
 function playSequence(numOfNotes){
+    piano.toggleFreeze();
     for (let i = 0; i < numOfNotes; i++){
         setTimeout(function timeoutHandler(){
             playNoteInSequence(i);
+            if (i == numOfNotes-1){
+                finishSequence();
+            }
         }, noteLength * i);
-
     }
 }
 
 function playNoteInSequence(index){
     let note = sequence[index];
     piano.playNote(note, noteLength);
+}
+
+function finishSequence(){
+    piano.toggleFreeze();
 }
 
 
