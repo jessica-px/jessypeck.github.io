@@ -10,7 +10,7 @@ var piano = {
         buildWhiteKeys();
         buildBlackKeys();
     },
-    getKey : getKey
+    playNote : playNote
 
 }
 
@@ -61,11 +61,17 @@ function buildWhiteKeys(){
 
 function buildBlackKeys(){
     var divs = document.getElementsByClassName("black-key");
-    var notes = ["c#4", "d#4", "f#4", "g#4", "Bb4"];
+    var notes = ["c#4", "d#4", "f#4", "g#4", "a#4"];
     for (let i = 0; i < divs.length; i++){
         let newKey = new PianoKey(notes[i], divs[i]);
         piano.keys.push(newKey);
     }
+}
+
+function playNote(note, duration){
+    let key = getKey(note);
+    key.playTone();
+    key.keepDivPressedFor(duration-100);
 }
 
 function getKey(note){

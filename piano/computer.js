@@ -2,12 +2,13 @@
 import {piano} from "./piano.js";
 import {keys as musicKeys} from "./musicKeys.js";
 
-var seqLength = 6;
+var seqLength = 12;
 var sequence = [];
 var noteLength = 600;
+var major = false;
 
 export var computer = {
-    currentKey : musicKeys.d,
+    currentKey : musicKeys.C,
     init : init
 }
 
@@ -21,7 +22,7 @@ function buildSequence(){
         sequence.push(randomNote);
     }
     console.log(sequence);
-    playSequence(seqLength)
+    playSequence(seqLength);
 }
 
 function playSequence(numOfNotes){
@@ -35,14 +36,17 @@ function playSequence(numOfNotes){
 
 function playNoteInSequence(index){
     let note = sequence[index];
-    let key = piano.getKey(note);
-    key.playTone();
-    key.keepDivPressedFor(noteLength-100);
+    piano.playNote(note, noteLength);
 }
 
 
 
 function getRandomNote(){
-    let randNum = Math.floor(Math.random()*computer.currentKey.validNotes.length);
-    return computer.currentKey.validNotes[randNum];
+    var validNotes = computer.currentKey.majorNotes;
+    if (!major){
+        validNotes = computer.currentKey.minorNotes;
+    }
+
+    let randNum = Math.floor(Math.random()*validNotes.length);
+    return validNotes[randNum];
 }
