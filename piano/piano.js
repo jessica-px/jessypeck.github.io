@@ -51,6 +51,8 @@ class PianoKey{
 function buildWhiteKeys(){
     var divs = document.getElementsByClassName("white-key");
     var notes = ["c4", "d4", "e4", "f4", "g4", "a4", "b4", "c5"];
+    var colors = ["red", "green", "blue", "red", "green", "blue", "red", "green"];
+    var highlightColor = [];
     for (let i = 0; i < divs.length; i++){
         let newKey = new PianoKey(notes[i], divs[i]);
         piano.keys.push(newKey);

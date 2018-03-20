@@ -93,9 +93,38 @@ html, body{
     grid-column: span 2;
 }
 
+.red:hover, .red:active, .red.active{
+    background-color: rgb(253, 115, 110);
+}
+.orange:hover, .orange:active, .orange.active{
+    background-color: rgb(233, 150, 83);
+}
+.yellow:hover, .yellow:active, .yellow.active{
+    background-color: rgb(238, 238, 84);
+}
+.green:hover, .green:active, .green.active{
+    background-color: rgb(126, 212, 100);
+}
+.aqua:hover, .aqua:active, .aqua.active{
+    background-color: rgb(107, 250, 231);
+}
+.blue:hover, .blue:active, .blue.active{
+    background-color: rgb(138, 165, 255);
+}
+.purple:hover, .purple:active, .purple.active{
+    background-color: rgb(219, 124, 248);
+}
+.pink:hover, .pink:active, .pink.active{
+    background-color: rgb(255, 157, 178);
+}
+
+.black-key:hover, .black-key:active, .black-key.active{
+    background-color: rgb(77, 77, 77);
+}
+
 @media (hover){
     .key:hover{
-        background-color: rgb(30, 170, 37);
+        /* background-color: rgb(30, 170, 37); */
         cursor: pointer;
     }
 }
