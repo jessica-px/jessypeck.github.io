@@ -2,7 +2,8 @@
 import {getPlayerInput} from "./game.js";
 export {piano};
 
-var synth = new Tone.Synth().toMaster()
+var synth = new Tone.Synth().toMaster();
+var compSynth = new Tone.Synth().toMaster();
 var noteDuration = "8n"; // an 8th note
 
 var piano = {
@@ -19,29 +20,35 @@ class PianoKey{
     constructor(noteName, div) {
         this.noteName = noteName;
         this.div = div;
+        this.active = false;
         this.addListener();
     }
 
     addListener(){
         this.div.addEventListener("mousedown", this.startTone.bind(this));
         this.div.addEventListener("mouseup", this.endTone.bind(this));
+        this.div.addEventListener("dragend", this.endTone.bind(this));
         this.div.addEventListener("mouseout", this.mouseOut.bind(this));
     }
 
     startTone(){
+        this.active = true;
         synth.triggerAttack(this.noteName);
-        
     }
 
     playTone(){
-        synth.triggerAttackRelease(this.noteName, noteDuration);
+        compSynth.triggerAttackRelease(this.noteName, noteDuration);
     }
 
     mouseOut(){
-        synth.triggerRelease()
+        if (this.active){
+            this.endTone();
+        }
     }
 
     endTone(){
+        console.log("input: " + this.noteName)
+        this.active = false;
         synth.triggerRelease();   
         getPlayerInput(this.noteName);
     }

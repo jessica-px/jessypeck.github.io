@@ -22,8 +22,8 @@ function buildSequence(seqLength){
 }
 
 function playSequence(numOfNotes, delay = 0){
+    piano.toggleFreeze();
     setTimeout(function timeoutHandler(){ // optional delay
-        piano.toggleFreeze();
         for (let i = 0; i < numOfNotes; i++){ // play each note up to given number
             setTimeout(function timeoutHandler(){ // delay between notes
                 playNoteInSequence(i);
@@ -41,7 +41,9 @@ function playNoteInSequence(index){
 }
 
 function finishSequence(){
-    piano.toggleFreeze();
+    setTimeout(function timeoutHandler(){ 
+        piano.toggleFreeze();
+    }, noteLength );
 }
 
 
