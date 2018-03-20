@@ -16,9 +16,104 @@ html, body{
 
 .container{
     display: grid;
-    grid-template-rows: 1fr 300px 1fr;
+    grid-template-rows: 1fr 300px 30px 90px 1fr;
     grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     height: 100%;
+    font-size: 1.2rem;
+}
+
+.ui-row{
+    grid-area: 4/2;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-areas:
+    "strict-title   start   key-title"
+    "strict         start   key";
+}
+
+.music-key{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+    grid-template-areas:
+    "letter  major major"
+    "arrows  minor minor";
+}
+
+#key-letter{
+    grid-area: letter;
+    font-size: 2rem;
+}
+
+#major{
+    grid-area: major;
+}
+
+#minor{
+    grid-area: minor;
+}
+
+.arrows{
+    grid-area: arrows;
+}
+
+
+
+.start{
+    grid-area: start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    margin: 0px auto 0 auto;
+    width: 80%;
+    height: 90px;
+    background-color: green;
+    border-radius: 10px;
+    box-shadow: 0 7px darkgreen;
+    border-bottom: 3px solid darkgreen;
+    font-size: 3rem;
+}
+
+.start:hover{
+    cursor: pointer;
+    background-color: lightgreen;
+}
+
+.start:active{
+    transform-origin: top;
+    box-shadow: 0 0px transparent;
+    transform: translateY(7px);
+    background-color: var(--highlightColor);
+}
+
+.title-strict, .title-key{
+    font-size: 1.6rem;
+}
+
+.strict{
+    grid-area: strict;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.toggle{
+    cursor: pointer;
+    padding: 10px;
+    color: rgb(41, 41, 41);
+    font-size: 1.8rem;
+}
+
+.toggle:hover{
+    text-decoration: underline;
+}
+
+.toggle.toggle-active{
+    color: rgb(26, 26, 26);
+    font-weight: bold;
 }
 
 #piano-freeze{
