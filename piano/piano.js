@@ -9,7 +9,8 @@ var piano = {
     init: function(){
         buildWhiteKeys();
         buildBlackKeys();
-    }
+    },
+    getKey : getKey
 
 }
 
@@ -57,4 +58,7 @@ function buildBlackKeys(){
     }
 }
 
-// function: get a specific key by note
+function getKey(note){
+    let thisKey = piano.keys.filter(key => key.noteName == note);
+    return thisKey[0];
+}
