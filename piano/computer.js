@@ -14,7 +14,8 @@ export var computer = {
 
 function buildSequence(seqLength){
     computer.sequence = [];
-    for (let i = 0; i < seqLength; i++){
+    computer.sequence.push(computer.currentKey.baseNote);
+    for (let i = 1; i < seqLength; i++){
         let randomNote = getRandomNote();
         computer.sequence.push(randomNote);
     }

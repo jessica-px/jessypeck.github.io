@@ -47,7 +47,6 @@ class PianoKey{
     }
 
     endTone(){
-        console.log("input: " + this.noteName)
         this.active = false;
         synth.triggerRelease();   
         getPlayerInput(this.noteName);

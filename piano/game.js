@@ -37,7 +37,6 @@ function replayTurn(){
 }
 
 function getPlayerInput(note){
-    console.log("testing input");
     playerInput.push(note);
     for (let i = 0; i < playerInput.length; i++){
         if (playerInput[i] != computer.sequence[i]){
