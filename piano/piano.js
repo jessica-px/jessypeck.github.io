@@ -1,4 +1,5 @@
 
+import {getPlayerInput} from "./game.js";
 export {piano};
 
 var synth = new Tone.Synth().toMaster()
@@ -10,8 +11,8 @@ var piano = {
         buildWhiteKeys();
         buildBlackKeys();
     },
-    playNote : playNote,
-    toggleFreeze : toggleFreeze
+    toggleFreeze : toggleFreeze,
+    playNote : playNote
 }
 
 class PianoKey{
@@ -24,19 +25,25 @@ class PianoKey{
     addListener(){
         this.div.addEventListener("mousedown", this.startTone.bind(this));
         this.div.addEventListener("mouseup", this.endTone.bind(this));
-        this.div.addEventListener("mouseout", this.endTone.bind(this));
+        this.div.addEventListener("mouseout", this.mouseOut.bind(this));
     }
 
     startTone(){
         synth.triggerAttack(this.noteName);
+        
     }
 
     playTone(){
         synth.triggerAttackRelease(this.noteName, noteDuration);
     }
 
+    mouseOut(){
+        synth.triggerRelease()
+    }
+
     endTone(){
-        synth.triggerRelease();
+        synth.triggerRelease();   
+        getPlayerInput(this.noteName);
     }
 
     keepDivPressedFor(duration){
