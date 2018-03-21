@@ -8,7 +8,9 @@ var turnNum = 0;
 var playerInput = [];
 
 export var game = {
-    begin : begin
+    begin : begin,
+    strict: false,
+    turnDiv: null,
 }
 
 
@@ -20,6 +22,8 @@ function begin(){
 
 function newTurn(){
     turnNum += 1;
+    game.turnDiv.innerHTML = turnNum;
+    computer.noteLength = 600 - (turnNum * 10); //speeds up computer each turn
     playerInput = [];
     if (turnNum > seqLength){
         console.log("You win!");

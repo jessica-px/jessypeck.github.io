@@ -2,7 +2,6 @@
 import {piano} from "./piano.js";
 import {keys as musicKeys} from "./musicKeys.js";
 
-var noteLength = 600;
 var timers = [];
 
 export var computer = {
@@ -10,6 +9,7 @@ export var computer = {
     currentKey : musicKeys.C,
     build : buildSequence,
     play : playSequence,
+    noteLength : 600,
     major : true
 }
 
@@ -21,6 +21,7 @@ function buildSequence(seqLength){
         computer.sequence.push(randomNote);
     }
     console.log(computer.sequence);
+    console.log(computer.noteLength);
 }
 
 function playSequence(numOfNotes, delay = 0){
@@ -28,12 +29,12 @@ function playSequence(numOfNotes, delay = 0){
     timers.map(clearTimeout);
     setTimeout(function timeoutHandler(){ // optional delay
         for (let i = 0; i < numOfNotes; i++){ // play each note up to given number
-            let newTimer = setTimeout(function timeoutHandler(){ // delay between notes
+            let newTimer = setTimeout(function timeoutHandler(){ 
                 playNoteInSequence(i);
                 if (i == numOfNotes-1){
                     finishSequence();
                 }
-            }, noteLength * i);
+            }, computer.noteLength * i); // delay between notes
             timers.push(newTimer);
         }
     }, delay);
@@ -41,14 +42,14 @@ function playSequence(numOfNotes, delay = 0){
 
 function playNoteInSequence(index){
     let note = computer.sequence[index];
-    piano.playNote(note, noteLength);
+    piano.playNote(note, computer.noteLength);
 }
 
 function finishSequence(){
     console.log("Finished");
     setTimeout(function timeoutHandler(){ 
         piano.toggleFreeze(false);
-    }, noteLength );
+    }, 600);
 }
 
 function getRandomNote(){
