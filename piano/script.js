@@ -12,6 +12,7 @@ function init() {
     console.log("INIT");
     bindDomElements();
     piano.init();
+    game.turnDiv = dom.turn;
 }
 
 var domElements, dom = {
@@ -20,7 +21,10 @@ var domElements, dom = {
     musicKeyRight : document.getElementById("right-arrow"),
     startBtn : document.getElementById("start-btn"),
     majorBtn : document.getElementById("major"),
-    minorBtn : document.getElementById("minor")
+    minorBtn : document.getElementById("minor"),
+    strictOnBtn : document.getElementById("strict-on"),
+    strictOffBtn : document.getElementById("strict-off"),
+    turn : document.getElementById("turn-num")
 }
 
 function bindDomElements(){
@@ -34,13 +38,22 @@ function bindDomElements(){
         toggleMajorMinor();});
     dom.minorBtn.addEventListener("click", function clickHandler(){
         toggleMajorMinor();});
+    dom.strictOnBtn.addEventListener("click", function clickHandler(){
+        toggleStrictMode();});
+    dom.strictOffBtn.addEventListener("click", function clickHandler(){
+        toggleStrictMode();});
 }
 
 function toggleMajorMinor(){
     computer.major = !computer.major;
     dom.majorBtn.classList.toggle("toggle-active");
     dom.minorBtn.classList.toggle("toggle-active");
+}
 
+function toggleStrictMode(){
+    game.strict = !game.strict;
+    dom.strictOnBtn.classList.toggle("toggle-active");
+    dom.strictOffBtn.classList.toggle("toggle-active");
 }
 
 function cycleMusicKeys(direction){
@@ -62,3 +75,4 @@ function clickStartRestart(){
     game.begin();
     dom.startBtn.innerHTML = "Restart";
 }
+

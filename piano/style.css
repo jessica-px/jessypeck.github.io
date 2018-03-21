@@ -19,7 +19,7 @@ html, body{
     grid-template-rows: 1fr 300px 30px auto 1fr;
     grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     height: 100%;
-    font-size: 1.2rem;
+    font-size: 2.0rem;
 }
 
 .ui-row{
@@ -97,12 +97,31 @@ html, body{
     background-color: var(--highlightColor);
 }
 
-.strict{
-    grid-area: strict;
-    display: flex;
-    flex-direction: column;
+.ui-left{
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    grid-template-rows: 1fr 1fr;
     align-items: center;
-    justify-content: space-evenly;
+    grid-template-areas:
+    "strict-on  turn-num"
+    "strict-off  turn-text";
+}
+
+#turn-num{
+    grid-area: turn-num;
+    font-size: 3.0rem;
+}
+
+#turn-text{
+    grid-area: turn-text;
+}
+
+#strict-on{
+    grid-area: strict-on;
+}
+
+#strict-off{
+    grid-area: strict-off;
 }
 
 .toggle{
@@ -124,7 +143,8 @@ html, body{
 }
 
 .toggle:hover{
-    background-color: rgb(117, 117, 117);
+    /* background-color: rgb(117, 117, 117); */
+    border-color: rgb(44, 44, 44);
 }
 
 
