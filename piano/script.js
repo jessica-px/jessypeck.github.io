@@ -19,6 +19,8 @@ var domElements, dom = {
     musicKeyLeft : document.getElementById("left-arrow"),
     musicKeyRight : document.getElementById("right-arrow"),
     startBtn : document.getElementById("start-btn"),
+    majorBtn : document.getElementById("major"),
+    minorBtn : document.getElementById("minor")
 }
 
 function bindDomElements(){
@@ -28,7 +30,18 @@ function bindDomElements(){
         cycleMusicKeys(1);});
     dom.startBtn.addEventListener("click", function clickHandler(){
         clickStartRestart();});
-    }
+    dom.majorBtn.addEventListener("click", function clickHandler(){
+        toggleMajorMinor();});
+    dom.minorBtn.addEventListener("click", function clickHandler(){
+        toggleMajorMinor();});
+}
+
+function toggleMajorMinor(){
+    computer.major = !computer.major;
+    dom.majorBtn.classList.toggle("toggle-active");
+    dom.minorBtn.classList.toggle("toggle-active");
+
+}
 
 function cycleMusicKeys(direction){
     let currIndex = keyList.indexOf(computer.currentKey.name);

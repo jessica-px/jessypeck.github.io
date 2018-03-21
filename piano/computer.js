@@ -3,7 +3,6 @@ import {piano} from "./piano.js";
 import {keys as musicKeys} from "./musicKeys.js";
 
 var noteLength = 600;
-var major = true;
 var timers = [];
 
 export var computer = {
@@ -11,6 +10,7 @@ export var computer = {
     currentKey : musicKeys.C,
     build : buildSequence,
     play : playSequence,
+    major : true
 }
 
 function buildSequence(seqLength){
@@ -53,7 +53,7 @@ function finishSequence(){
 
 function getRandomNote(){
     var validNotes = computer.currentKey.majorNotes;
-    if (!major){
+    if (!computer.major){
         validNotes = computer.currentKey.minorNotes;
     }
 
