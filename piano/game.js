@@ -2,13 +2,12 @@
 export {getPlayerInput};
 import {computer} from "./computer.js";
 
-var seqLength = 4;
+var seqLength = 20;
 var turnNum = 0;
 var playerInput = [];
 
 export var game = {
-    init : init
-
+    init : init,
 }
 
 function init(){

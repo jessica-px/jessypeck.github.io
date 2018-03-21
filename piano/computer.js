@@ -6,10 +6,10 @@ var noteLength = 600;
 var major = true;
 
 export var computer = {
-    currentKey : musicKeys.C,
     sequence : [],
+    currentKey : musicKeys.C,
     build : buildSequence,
-    play : playSequence
+    play : playSequence,
 }
 
 function buildSequence(seqLength){
@@ -46,8 +46,6 @@ function finishSequence(){
         piano.toggleFreeze();
     }, noteLength );
 }
-
-
 
 function getRandomNote(){
     var validNotes = computer.currentKey.majorNotes;

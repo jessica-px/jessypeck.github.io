@@ -1,4 +1,5 @@
 
+export var keyList = ["C", "G", "D", "A", "E", "B", "F"];
 
 export var keys = {
     C : {
