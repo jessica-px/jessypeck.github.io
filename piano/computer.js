@@ -4,6 +4,7 @@ import {keys as musicKeys} from "./musicKeys.js";
 
 var noteLength = 600;
 var major = true;
+var timers = [];
 
 export var computer = {
     sequence : [],
@@ -23,15 +24,17 @@ function buildSequence(seqLength){
 }
 
 function playSequence(numOfNotes, delay = 0){
-    piano.toggleFreeze();
+    piano.toggleFreeze(true);
+    timers.map(clearTimeout);
     setTimeout(function timeoutHandler(){ // optional delay
         for (let i = 0; i < numOfNotes; i++){ // play each note up to given number
-            setTimeout(function timeoutHandler(){ // delay between notes
+            let newTimer = setTimeout(function timeoutHandler(){ // delay between notes
                 playNoteInSequence(i);
                 if (i == numOfNotes-1){
                     finishSequence();
                 }
             }, noteLength * i);
+            timers.push(newTimer);
         }
     }, delay);
 }
@@ -42,8 +45,9 @@ function playNoteInSequence(index){
 }
 
 function finishSequence(){
+    console.log("Finished");
     setTimeout(function timeoutHandler(){ 
-        piano.toggleFreeze();
+        piano.toggleFreeze(false);
     }, noteLength );
 }
 

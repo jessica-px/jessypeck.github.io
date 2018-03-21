@@ -2,19 +2,18 @@
 export {getPlayerInput};
 import {computer} from "./computer.js";
 
+var active = false;
 var seqLength = 20;
 var turnNum = 0;
 var playerInput = [];
 
 export var game = {
-    init : init,
+    begin : begin
 }
 
-function init(){
-    begin();
-}
 
 function begin(){
+    turnNum = 0;
     computer.build(seqLength);
     newTurn();
 }

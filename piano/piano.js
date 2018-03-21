@@ -14,6 +14,7 @@ var piano = {
     },
     toggleFreeze : toggleFreeze,
     playNote : playNote
+
 }
 
 class PianoKey{
@@ -92,7 +93,13 @@ function getKey(note){
     return thisKey[0];
 }
 
-function toggleFreeze(){
-    var freeze = document.getElementById("piano-freeze");
-    freeze.classList.toggle("enabled");
+function toggleFreeze(value = null){
+    var freezeDiv = document.getElementById("piano-freeze");
+    switch(value){
+        case(null): freezeDiv.classList.toggle("enabled");
+        case(true): freezeDiv.classList.add("enabled");
+        case(false): freezeDiv.classList.remove("enabled");
+    }
+
+
 }

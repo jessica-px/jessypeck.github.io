@@ -12,13 +12,13 @@ function init() {
     console.log("INIT");
     bindDomElements();
     piano.init();
-    game.init();
 }
 
 var domElements, dom = {
     musicKey : document.getElementById("key-letter"),
     musicKeyLeft : document.getElementById("left-arrow"),
-    musicKeyRight : document.getElementById("right-arrow")
+    musicKeyRight : document.getElementById("right-arrow"),
+    startBtn : document.getElementById("start-btn"),
 }
 
 function bindDomElements(){
@@ -26,13 +26,12 @@ function bindDomElements(){
         cycleMusicKeys(-1);});
     dom.musicKeyRight.addEventListener("click", function clickHandler(){
         cycleMusicKeys(1);});
-        console.log(dom.musicKeyLeft);
+    dom.startBtn.addEventListener("click", function clickHandler(){
+        clickStartRestart();});
     }
 
 function cycleMusicKeys(direction){
-    console.log("Current key: " + computer.currentKey.name);
     let currIndex = keyList.indexOf(computer.currentKey.name);
-    console.log("Current index: " + currIndex);
     let newIndex = currIndex + direction;
     if (newIndex < 0){
         newIndex += keyList.length;
@@ -43,5 +42,10 @@ function cycleMusicKeys(direction){
     let newKey = keyList[newIndex];
     dom.musicKey.innerHTML = newKey;
     computer.currentKey = musicKeys[newKey];
-    console.log("Chaning key to: " + newKey);
+    console.log("Changing key to: " + newKey);
+}
+
+function clickStartRestart(){
+    game.begin();
+    dom.startBtn.innerHTML = "Restart";
 }
