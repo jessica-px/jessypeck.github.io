@@ -62,11 +62,9 @@ function getPlayerInput(note){
 
 function playerFail(){
     if (game.strict){
-        console.log("Incorrect Input - GAME OVER");
         lose();
     }
     else{
-        console.log("Incorrect Input - try again");
         replayTurn();
     }
 }

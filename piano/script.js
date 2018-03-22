@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function(event) {
 });
 
 function init() {
-    console.log("INIT");
     bindDomElements();
     piano.init();
     game.turnDiv = dom.turn;
@@ -70,7 +69,6 @@ function cycleMusicKeys(direction){
     let newKey = keyList[newIndex];
     dom.musicKey.innerHTML = newKey;
     computer.currentKey = musicKeys[newKey];
-    console.log("Changing key to: " + newKey);
 }
 
 function clickStartRestart(){

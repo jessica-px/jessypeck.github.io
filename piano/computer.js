@@ -20,8 +20,6 @@ function buildSequence(seqLength){
         let randomNote = getRandomNote();
         computer.sequence.push(randomNote);
     }
-    console.log(computer.sequence);
-    console.log(computer.noteLength);
 }
 
 function playSequence(numOfNotes, delay = 0){
@@ -46,7 +44,6 @@ function playNoteInSequence(index){
 }
 
 function finishSequence(){
-    console.log("Finished");
     setTimeout(function timeoutHandler(){ 
         piano.toggleFreeze(false);
     }, 600);
