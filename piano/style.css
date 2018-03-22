@@ -2,6 +2,7 @@
 :root {
     --background: rgb(104, 104, 104);
     --darktext : rgb(26, 26, 26);
+    --lightGrey : rgb(71, 71, 71);
 }
 
 html, body{
@@ -28,6 +29,7 @@ a:hover{
     grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     height: 100%;
     font-size: 2.0rem;
+    user-select: none;
 }
 
 .title{
@@ -88,7 +90,7 @@ a:hover{
 }
 
 .arrow:hover{
-    color: red;
+    color: var(--lightGrey);
     cursor: pointer;
 }
 
@@ -155,14 +157,13 @@ a:hover{
     margin: 2px;
     color: rgb(41, 41, 41);
     font-size: 1.8rem;
-    /* background-color: rgb(71, 71, 71); */
-    border: 2px solid rgb(71, 71, 71);
+    border: 2px solid var(--lightGrey);
     border-radius: 10px;
 }
 
 
 .toggle.toggle-active{
-    background-color: rgb(71, 71, 71);
+    background-color: var(--lightGrey);
     font-weight: bold;
 }
 
