@@ -14,6 +14,14 @@ html, body{
     background-color: var(--background);
 }
 
+a{
+    color: inherit;
+}
+
+a:hover{
+    color:black;
+}
+
 .container{
     display: grid;
     grid-template-rows: 1fr 60px 300px 30px auto 1fr 25px;
