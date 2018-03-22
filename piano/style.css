@@ -1,7 +1,7 @@
 
 :root {
     --background: rgb(104, 104, 104);
-    --highlightColor: green;
+    --darktext : rgb(26, 26, 26);
 }
 
 html, body{
@@ -16,19 +16,35 @@ html, body{
 
 .container{
     display: grid;
-    grid-template-rows: 1fr 300px 30px auto 1fr;
+    grid-template-rows: 1fr 60px 300px 30px auto 1fr 25px;
     grid-template-columns: 1fr minmax(auto, 680px) 1fr;
     height: 100%;
     font-size: 2.0rem;
 }
 
+.title{
+    grid-area: 1/2;
+    font-size: 4.6rem;
+    align-self: center;
+}
+
+.title-display{
+    font-family: "Miniver";
+}
+
+#message{
+    color: var(--darktext);
+    grid-area: 2/2;
+}
+
 .ui-row{
-    grid-area: 4/2;
+    grid-area: 5/2;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
     "strict         start   key";
+    color: var(--darktext);
 }
 
 .music-key{
@@ -80,21 +96,22 @@ html, body{
     height: 90px;
     background-color: rgb(84, 173, 84);
     border-radius: 10px;
-    box-shadow: 0 7px rgb(66, 133, 66);
-    border-bottom: 3px solid rgb(66, 133, 66);
+    box-shadow: 0 7px rgb(35, 77, 35);
+    border-bottom: 3px solid rgb(35, 77, 35);
     font-size: 3rem;
+    color: rgb(35, 77, 35);
 }
 
 #start-btn:hover{
     cursor: pointer;
-    background-color: rgb(56, 204, 56);
+    background-color: rgb(49, 163, 49);
 }
 
 #start-btn:active{
     transform-origin: top;
     box-shadow: 0 0px transparent;
     transform: translateY(7px);
-    background-color: var(--highlightColor);
+    background-color: rgb(49, 163, 49);
 }
 
 .ui-left{
@@ -137,20 +154,18 @@ html, body{
 
 
 .toggle.toggle-active{
-    color: rgb(26, 26, 26);
     background-color: rgb(71, 71, 71);
     font-weight: bold;
 }
 
 .toggle:hover{
-    /* background-color: rgb(117, 117, 117); */
-    border-color: rgb(44, 44, 44);
+    border-color: var(--darktext);
 }
 
 
 #piano-freeze{
     display: none;
-    grid-area: 2/2;
+    grid-area: 3/2;
     z-index: 3;
     width: 100%;
     height: 100%;
@@ -163,7 +178,7 @@ html, body{
 
 
 .piano-white{
-    grid-area: 2/2;
+    grid-area: 3/2;
     display: grid;
     grid-template-rows: 3px 1fr;
     grid-template-columns: repeat(8, 1fr);
@@ -173,7 +188,7 @@ html, body{
 }
 
 .piano-black{
-    grid-area: 2/2;
+    grid-area: 3/2;
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: repeat(24, 1fr);
@@ -265,6 +280,12 @@ html, body{
 
 .frozen{
     pointer-events: none;
+}
+
+.footer{
+    grid-area: 7/2;
+    font-size: 1.6rem;
+    color: rgba(26, 26, 26, 0.644);
 }
 
 @media (hover){

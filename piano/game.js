@@ -2,8 +2,8 @@
 export {getPlayerInput};
 import {computer} from "./computer.js";
 
-var active = false;
-var seqLength = 20;
+var gameFinished = false;
+var seqLength = 3;
 var turnNum = 0;
 var playerInput = [];
 
@@ -11,10 +11,13 @@ export var game = {
     begin : begin,
     strict: false,
     turnDiv: null,
+    messageDiv : null
 }
 
 
 function begin(){
+    gameFinished = false;
+    game.messageDiv.innerHTML = "";
     turnNum = 0;
     computer.build(seqLength);
     newTurn();
@@ -26,7 +29,9 @@ function newTurn(){
     computer.noteLength = 600 - (turnNum * 10); //speeds up computer each turn
     playerInput = [];
     if (turnNum > seqLength){
-        console.log("You win!");
+        turnNum = seqLength;
+        game.turnDiv.innerHTML = turnNum;
+        win();
     }
     else{
         computer.play(turnNum, 600);
@@ -39,24 +44,43 @@ function replayTurn(){
 }
 
 function getPlayerInput(note){
-    playerInput.push(note);
-    for (let i = 0; i < playerInput.length; i++){
-        if (playerInput[i] != computer.sequence[i]){
-            playerFail();
-            return;
-        }
-        if (i == turnNum-1){
-            playerSuccess();
+    if (!gameFinished){
+        playerInput.push(note);
+        for (let i = 0; i < playerInput.length; i++){
+            if (playerInput[i] != computer.sequence[i]){
+                playerFail();
+                return;
+            }
+            if (i == turnNum-1){
+                playerSuccess();
+            }
         }
     }
+
 }
 
 function playerFail(){
-    console.log("Incorrect Input");
-    replayTurn();
+    if (game.strict){
+        console.log("Incorrect Input - GAME OVER");
+        lose();
+    }
+    else{
+        console.log("Incorrect Input - try again");
+        replayTurn();
+    }
 }
 
 function playerSuccess(){
-    console.log("Success!");
     newTurn();
+}
+
+function win(){
+    gameFinished = true;
+    game.messageDiv.innerHTML = "You win! Press <i class='fas fa-redo-alt fa-xs'></i> to play again.";
+}
+
+function lose(){
+    gameFinished = true;
+    game.messageDiv.innerHTML = "You lost. Press <i class='fas fa-redo-alt fa-xs'></i> to try again.";
+
 }

@@ -96,9 +96,9 @@ function getKey(note){
 function toggleFreeze(value = null){
     var freezeDiv = document.getElementById("piano-freeze");
     switch(value){
-        case(null): freezeDiv.classList.toggle("enabled");
-        case(true): freezeDiv.classList.add("enabled");
-        case(false): freezeDiv.classList.remove("enabled");
+        case(null): freezeDiv.classList.toggle("enabled"); break;
+        case(true): freezeDiv.classList.add("enabled"); break;
+        case(false): freezeDiv.classList.remove("enabled"); break;
     }
 
 

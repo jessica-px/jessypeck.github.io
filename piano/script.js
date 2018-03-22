@@ -13,6 +13,7 @@ function init() {
     bindDomElements();
     piano.init();
     game.turnDiv = dom.turn;
+    game.messageDiv = dom.message;
 }
 
 var domElements, dom = {
@@ -24,7 +25,8 @@ var domElements, dom = {
     minorBtn : document.getElementById("minor"),
     strictOnBtn : document.getElementById("strict-on"),
     strictOffBtn : document.getElementById("strict-off"),
-    turn : document.getElementById("turn-num")
+    turn : document.getElementById("turn-num"),
+    message : document.getElementById("message")
 }
 
 function bindDomElements(){
@@ -73,6 +75,6 @@ function cycleMusicKeys(direction){
 
 function clickStartRestart(){
     game.begin();
-    dom.startBtn.innerHTML = "Restart";
+    dom.startBtn.innerHTML = '<i class="fas fa-redo-alt"></i>';
 }
 
