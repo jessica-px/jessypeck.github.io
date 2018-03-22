@@ -3,7 +3,7 @@ export {getPlayerInput};
 import {computer} from "./computer.js";
 
 var gameFinished = false;
-var seqLength = 1;
+var seqLength = 20;
 var turnNum = 0;
 var playerInput = [];
 var synth = new Tone.Synth().toMaster();
